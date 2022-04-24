@@ -2,6 +2,10 @@ const { Schema, model } = require("mongoose");
 
 const clubSchema = new Schema(
     {
+        name: {
+            type: String,
+            required: true
+        },
         address: {
             type: String,
             required: true

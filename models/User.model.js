@@ -21,7 +21,7 @@ const userSchema = new Schema(
     }],
     favouriteClub: [{
       type: Schema.Types.ObjectId,
-      ref: 'Match'
+      ref: 'Club'
     }],
     role: {
       type: String,
@@ -36,6 +36,7 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'User'
     }],
+
   },
 
   {

@@ -21,7 +21,11 @@ const matchSchema = new Schema(
         genre: {
             type: String,
             enum: ['Mixto', 'Femenino', 'Masculino']
-        }
+        },
+        comments: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Comment'
+        }]
     },
 
     {
