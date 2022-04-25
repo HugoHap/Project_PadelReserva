@@ -1,16 +1,17 @@
 const router = require("express").Router()
 const User = require("../models/User.model")
+const { isLoggedIn } = require('../middleware/route-guard.js')
 
 
 // User profile 
 
-router.get('/perfil/:id', (req, res, next) => {
-    const { id } = req.params
+router.get('/', isLoggedIn, (req, res, next) => {
+    const { _id } = req.session.currentUser
 
     User
-        .findById(id)
+        .findById(_id)
         .then(player => {
-            res.render('user/profile-page', { player })
+            res.render('user/profile-page', player)
         })
         .catch(err => console.log(err))
 })
@@ -19,7 +20,7 @@ router.get('/perfil/:id', (req, res, next) => {
 
 // Edit user profile 
 
-router.get('/perfil/:id/edit', (req, res, next) => {
+router.get('/:id/editar', (req, res, next) => {
     const { id } = req.params
 
     User
@@ -30,15 +31,16 @@ router.get('/perfil/:id/edit', (req, res, next) => {
         .catch(err => console.log(err))
 })
 
-router.post('/perfil/:id/edit', (req, res, next) => {
+
+router.post('/:id/editar', (req, res, next) => {
 
     const { id } = req.params
-    const { name, favouriteClubs, avatar, friends } = req.body
+    const { name, avatar, email } = req.body
 
     User
-        .findByIdAndUpdate(id, { name, favouriteClubs, avatar, friends }, { new: true })
+        .findByIdAndUpdate(id, { name, avatar, email }, { new: true })
         .then(player => {
-            res.redirect('/perfil/:id')
+            res.redirect('/perfil')
         })
         .catch(err => console.log(err))
 })
@@ -47,16 +49,17 @@ router.post('/perfil/:id/edit', (req, res, next) => {
 
 // Delete profile
 
-router.post('/perfil/:id/delete', (req, res, next) => {
+router.post('/:id/eliminar', (req, res, next) => {
     const { id } = req.params
 
     User
         .findByIdAndDelete(id)
         .then(() => {
-            res.redirect('/perfil/:id')
+            res.redirect('/')
         })
         .catch(err => console.log(err))
 });
+
 
 
 module.exports = router
