@@ -29,7 +29,6 @@ const clubSchema = new Schema(
     },
 
     {
-
         timestamps: true,
     }
 );

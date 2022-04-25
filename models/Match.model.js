@@ -9,13 +9,16 @@ const matchSchema = new Schema(
         date: {
             type: Date
         },
+        time: {
+            type: Date
+        },
         players: [{
             type: Schema.Types.ObjectId,
             ref: 'User'
         }],
         club: {
             type: Schema.Types.ObjectId,
-            ref: 'Comment'
+            ref: 'Club'
         },
         location: {
             type: {
