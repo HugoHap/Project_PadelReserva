@@ -30,6 +30,7 @@ router.get('/iniciar-sesion', (req, res, next) => {
 router.post('/iniciar-sesion', (req, res, next) => {
 
     const { email, password } = req.body
+    console.log(req.body);
 
     User
         .findOne({ email })
@@ -41,7 +42,9 @@ router.post('/iniciar-sesion', (req, res, next) => {
                 res.render('auth/login', { errorMessage: 'La contraseña es incorrecta' })
                 return
             } else {
+                console.log(user);
                 req.session.currentUser = user
+                console.log(req.session);
                 res.redirect('/')
             }
         })

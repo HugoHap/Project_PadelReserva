@@ -8,7 +8,9 @@ const hbs = require("hbs");
 
 const app = express();
 
+
 require("./config")(app);
+require("./config/session.config")(app);
 
 const capitalized = require("./utils/capitalized");
 const projectName = "PadelReserva";
