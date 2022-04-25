@@ -24,6 +24,12 @@ app.use("/", index);
 const authRoutes = require("./routes/auth.routes");
 app.use("/", authRoutes);
 
+const matchRoutes = require("./routes/match.routes");
+app.use("/partidos", matchRoutes);
+
+const clubRoutes = require("./routes/club.routes");
+app.use("/clubs", clubRoutes);
+
 require("./error-handling")(app);
 
 module.exports = app;
