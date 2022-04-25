@@ -1,0 +1,21 @@
+<div class="container">
+
+    <h2>Listado centros deportivos</h2>
+
+    <hr>
+
+    <ul>
+        {{#each clubs}}
+        <li class="club-row">
+            <a href="/clubs/{{_id}}">{{name}}</a>
+        </li>
+        {{/each}}
+    </ul>
+
+    <hr>
+
+    <a href="/" class="btn btn-dark">Volver al inicio</a>
+
+    <a href="/clubs/crear" class="btn btn-dark">Crear un club</a>
+
+</div>

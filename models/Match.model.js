@@ -20,12 +20,6 @@ const matchSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'Club'
         },
-        location: {
-            type: {
-                type: String
-            },
-            coordinates: [Number]
-        },
         price: {
             type: Number
         },

@@ -9,7 +9,7 @@
             <form action="/partidos/crear" method="POST">
 
                 <div class="mb-3">
-                    <label for="date" class="form-label">Fecha</label>
+                    <label for="date" class="form-label">Fecha y Hora</label>
                     <input type="datetime-local" class="form-control" id="date" name="date">
                 </div>
                 <div class="mb-3">
@@ -27,9 +27,9 @@
                 <div class="mb-3">
                     <label for="genre" class="form-label">Genero</label>
                     <select id="genre" class="form-select" name="genre">
-                        <option value="{{'Mixto'}}">Mixto</option>
-                        <option value="{{'Femenino'}}">Femenino</option>
-                        <option value="{{'Masculino'}}">Masculino</option>
+                        <option value="Mixto">Mixto</option>
+                        <option value='Femenino'>Femenino</option>
+                        <option value='Masculino'>Masculino</option>
                     </select>
                 </div>
 

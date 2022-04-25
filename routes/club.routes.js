@@ -36,7 +36,7 @@ router.post('/crear', (req, res) => {
     Club
         .create({ name, address, image, location })
         .then(() => {
-            res.redirect(`/clubes`)
+            res.redirect(`/clubs`)
         })
         .catch(err => console.log(err))
 })
