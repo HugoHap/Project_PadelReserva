@@ -1,33 +1,33 @@
-const router = require("express").Router()
-const bcrypt = require('bcryptjs')
-const User = require("../models/User.model")
-const saltRounds = 10
+// const router = require("express").Router()
+// const bcrypt = require('bcryptjs')
+// const User = require("../models/User.model")
+// const saltRounds = 10
 
-// Signup
-router.get('/registro', (req, res, next) => {
-    res.render('auth/signup')
-})
+// // Signup
+// router.get('/registro', (req, res, next) => {
+//     res.render('auth/signup')
+// })
 
-router.post('/registro', (req, res, next) => {
+// router.post('/registro', (req, res, next) => {
 
-    const { password } = req.body
+//     const { password } = req.body
 
-    bcrypt
-        .genSalt(saltRounds)
-        .then(salt => bcrypt.hash(password, salt))
-        .then(hashedPassword => User.create({ ...req.body, password: hashedPassword }))
-        .then(() => res.redirect('/'))
-        .catch(error => next(error))
-})
+//     bcrypt
+//         .genSalt(saltRounds)
+//         .then(salt => bcrypt.hash(password, salt))
+//         .then(hashedPassword => User.create({ ...req.body, password: hashedPassword }))
+//         .then(() => res.redirect('/'))
+//         .catch(error => next(error))
+// })
 
 
 
-// Login
-router.get('/iniciar-sesion', (req, res, next) => {
-    res.render('auth/login')
-})
+// // Login
+// router.get('/iniciar-sesion', (req, res, next) => {
+//     res.render('auth/login')
+// })
 
-router.post('/iniciar-sesion', (req, res, next) => {
+// router.post('/iniciar-sesion', (req, res, next) => {
 
     const { email, password } = req.body
     console.log(req.body);
@@ -52,9 +52,9 @@ router.post('/iniciar-sesion', (req, res, next) => {
 })
 
 
-// Logout
-router.post('/cerrar-sesion', (req, res, next) => {
-    req.session.destroy(() => res.redirect('/iniciar-sesion'))
-})
+// // Logout
+// router.post('/cerrar-sesion', (req, res, next) => {
+//     req.session.destroy(() => res.redirect('/iniciar-sesion'))
+// })
 
-module.exports = router
+// module.exports = router
