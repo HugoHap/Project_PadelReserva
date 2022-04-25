@@ -7,8 +7,15 @@ const clubSchema = new Schema(
             required: true
         },
         address: {
-            type: String,
-            required: true
+            street: {
+                type: String
+            },
+            city: {
+                type: String
+            },
+            zip: {
+                type: Number
+            },
         },
         location: {
             type: {
@@ -16,11 +23,7 @@ const clubSchema = new Schema(
             },
             coordinates: [Number]
         },
-        matches: [{
-            type: Schema.Types.ObjectId,
-            ref: 'Match'
-        }],
-        imgUrl: {
+        image: {
             type: String
         }
     },

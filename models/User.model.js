@@ -15,11 +15,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    matches: [{
-      type: Schema.Types.ObjectId,
-      ref: 'Match'
-    }],
-    favouriteClub: [{
+    favouriteClubs: [{
       type: Schema.Types.ObjectId,
       ref: 'Club'
     }],
@@ -28,7 +24,7 @@ const userSchema = new Schema(
       enum: ['USER', 'ADMIN', 'MOD'],
       default: 'USER'
     },
-    imgUrl: {
+    avatar: {
       type: String,
       default: "https://i.stack.imgur.com/l60Hf.png"
     },

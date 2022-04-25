@@ -3,11 +3,19 @@ const { Schema, model } = require("mongoose");
 const matchSchema = new Schema(
     {
         result: {
-            type: String,
-            required: true
+            type: Number,
+            default: 0
         },
-        initDate: {
+        date: {
             type: Date
+        },
+        players: [{
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }],
+        club: {
+            type: Schema.Types.ObjectId,
+            ref: 'Comment'
         },
         location: {
             type: {
