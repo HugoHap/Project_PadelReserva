@@ -42,9 +42,9 @@ router.post('/iniciar-sesion', (req, res, next) => {
                 res.render('auth/login', { errorMessage: 'La contraseña es incorrecta' })
                 return
             } else {
-                console.log(user);
+ 
                 req.session.currentUser = user
-                console.log(req.session);
+
                 res.redirect('/')
             }
         })

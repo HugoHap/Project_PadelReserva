@@ -11,21 +11,21 @@
             <p>Lugar:{{club.name}}</p>
         </div>
         <div class="col-md-4">
-            <h3>Casting</h3>
-            {{#each cast}}
-            <p>{{name}} {{occupation}} {{catchPhrase}}</p>
+            <h3>Jugadores</h3>
+            {{#each players}}
+            <p>{{name}}</p>
             {{/each}}
         </div>
     </div>
 
     <hr>
 
-    <form action="/movies/{{id}}/delete" method="POST">
+    <form action="/partidos/{{id}}/delete" method="POST">
         <button class="btn btn-sm btn-warning" type="submit">Eliminar</button>
     </form>
 
-    <a href="/movies/{{id}}/edit" class="btn btn-dark">Editar pelicula</a>
+    <a href="/partidos/{{id}}/edit" class="btn btn-dark">Editar partido</a>
 
-    <a href="/movies" class="btn btn-dark">Volver a la lista</a>
+    <a href="/partidos" class="btn btn-dark">Volver a la lista</a>
 
 </div>

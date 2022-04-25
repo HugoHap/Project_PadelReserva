@@ -1,0 +1,34 @@
+<div class="container">
+
+    <h2>partidos disponibles</h2>
+
+    <hr>
+
+    {{!-- <ul>
+        <li class="match-row">
+            <a href="/partidos/{{_id}}">{{date}}</a>
+        </li>
+    </ul> --}}
+
+    <div class="row">
+        {{#each matches}}
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{date}}</h5>
+                    <p class="card-text">{{club.name}}</p>
+                    <p class="card-text">{{genre}}</p>
+                    <a href="/partidos/{{_id}}" class="btn btn-primary">Ir al partido</a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+
+    <hr>
+
+    <a href="/" class="btn btn-dark">Volver al inicio</a>
+
+    <a href="/partidos/crear" class="btn btn-dark">Crear un partido</a>
+
+</div>
