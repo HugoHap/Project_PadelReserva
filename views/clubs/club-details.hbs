@@ -1,31 +1,60 @@
 <div class="container">
 
-    {{!-- <h2>Detalles de {{title}}</h2> --}}
-
-    <hr>
-
     <div class="row">
         <div class="col-md-8">
-            <h3>Detalles</h3>
-            <p>Fecha:{{date}}</p>
-            <p>Lugar:{{club.name}}</p>
-        </div>
-        <div class="col-md-4">
-            <h3>Casting</h3>
-            {{#each cast}}
-            <p>{{name}} {{occupation}} {{catchPhrase}}</p>
+            <img src="/images/club-padel1.jpeg" class="figure-img img-fluid rounded" alt="Foto del club">
+            <h2>{{name}}</h2>
+            <p>{{address.street}}, {{address.city}}, {{address.zip}}</p>
+            <button type="button" class="btn btn-danger">Seguir</button>
+            {{#each player}}
+            <img src="/images/club-padel1.jpeg" class="rounded mx-auto d-block" alt="...">
             {{/each}}
+            <p>11 Pistas disponibles </p>
+            <button type="button" class="btn btn-dark">Como llegar</button>
+            <button type="button" class="btn btn-dark">Web</button>
+            <button type="button" class="btn btn-dark">Llamar</button>
         </div>
     </div>
 
-    <hr>
+    <style>
+        #clubsMap {
+            height: 300px;
+            background-color: red;
+        }
+    </style>
 
-    <form action="/movies/{{id}}/delete" method="POST">
-        <button class="btn btn-sm btn-warning" type="submit">Eliminar</button>
-    </form>
+    <figure id="clubsMap"></figure>
 
-    <a href="/movies/{{id}}/edit" class="btn btn-dark">Editar pelicula</a>
 
-    <a href="/movies" class="btn btn-dark">Volver a la lista</a>
 
-</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Horarios</th>
+            </tr>
+        <tbody>
+            <tr>
+                <th scope="row">Lunes - Viernes</th>
+                <td></td>
+                <td></td>
+                <td>08:00 - 23:00</td>
+            </tr>
+            <tr>
+                <th scope="row">Sábado - Domingo </th>
+                <td></td>
+                <td></td>
+                <td>09:00 - 22:00</td>
+            </tr>
+            <tr>
+                <th scope="row">* Festivos</th>
+                <td colspan="2"></td>
+                <td>09:00 - 14:00</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/club-map.js"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtf8mk6VyrR7KMMLz5WRmqhcbrtuTYDCg&callback=initMap"></script>

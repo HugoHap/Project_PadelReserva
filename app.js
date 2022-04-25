@@ -33,6 +33,9 @@ app.use("/partidos", matchRoutes);
 const clubRoutes = require("./routes/club.routes");
 app.use("/clubs", clubRoutes);
 
+const apiRouter = require('./routes/api.routes');
+app.use('/api', apiRouter);
+
 require("./error-handling")(app);
 
 module.exports = app;
