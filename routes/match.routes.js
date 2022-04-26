@@ -16,6 +16,7 @@ router.get('/', (req, res) => {
         .catch(err => console.log(err))
 })
 
+
 router.get("/crear", (req, res, next) => {
 
     Club
