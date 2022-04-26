@@ -25,6 +25,18 @@ const clubSchema = new Schema(
         },
         image: {
             type: String
+        },
+        numberOfFields: {
+            type: Number
+        },
+        web: {
+            type: String
+        },
+        phone: {
+            type: String
+        },
+        schedule: {
+            type: String
         }
     },
 

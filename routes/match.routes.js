@@ -16,6 +16,7 @@ router.get('/', (req, res) => {
         .catch(err => console.log(err))
 })
 
+
 router.get("/crear", (req, res, next) => {
 
     Club
@@ -74,8 +75,9 @@ router.get('/:id/edit', (req, res) => {
         .findById(id)
         .populate("club")
         .then(editMatch => {
-            res.render('matches/match-edit', { editMatch
-})
+            res.render('matches/match-edit', {
+                editMatch
+            })
         })
         .catch(err => console.log(err))
 })

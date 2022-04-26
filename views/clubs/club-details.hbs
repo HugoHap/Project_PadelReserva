@@ -3,9 +3,16 @@
     <div class="row">
         <div class="col-md-8">
             <img src="/images/club-padel1.jpeg" class="figure-img img-fluid rounded" alt="Foto del club">
-            <h2>{{name}}</h2>
-            <p>{{address.street}}, {{address.city}}, {{address.zip}}</p>
-            <button type="button" class="btn btn-danger">Seguir</button>
+            <h2>{{club.name}}</h2>
+            <p>{{club.address.street}}, {{club.address.city}}, {{club.address.zip}}</p>
+            {{!-- <button type="button" class="btn btn-danger">Seguir</button> --}}
+            {{!-- <a href="/clubs/{{_id}}/favourite" class="btn btn-danger">Seguir</a> --}}
+
+
+            <form action="/clubs/{{_id}}/favourite" method="POST">
+                <button class="btn btn-danger" type="submit">Seguir</button>
+            </form>
+
             {{#each player}}
             <img src="/images/club-padel1.jpeg" class="rounded mx-auto d-block" alt="...">
             {{/each}}
@@ -13,6 +20,11 @@
             <button type="button" class="btn btn-dark">Como llegar</button>
             <button type="button" class="btn btn-dark">Web</button>
             <button type="button" class="btn btn-dark">Llamar</button>
+            <a href="/clubs/{{_id}}/editar" class="btn btn-dark">Editar perfil</a>
+            {{#each match}}
+            <p>{{match._id}} </p>
+            <p>{{date}} </p>
+            {{/each}}
         </div>
     </div>
 
