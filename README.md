@@ -13,9 +13,11 @@
 | GET  | /partidos  | Matches List  |
 | GET  | /partidos/crear  | Create Match Form  |
 | POST | /partidos/crear  | Create Match Form POST  |
+| POST | /partidos/:id/unirse  | Join Match Button POST  |
 | GET  | /partidos/:id  | Match Details  |
-| POST  | /partidos/:id/editar  | Landing Page  |
-| POST | /partidos/:id/eliminar  | Landing Page  |
+| POST  | /partidos/:id/editar  | Edit Match Post  |
+| POST | /partidos/:id/eliminar  | Delete Match Post  |
+| POST | /partidos/:id/editar/eliminarjugador  | Delete Player Match Post  |
 | POST | /partidos/:id/ | Match Comment POST
 | POST  | /partidos:id/eliminar-comentario  | Delete Comment Match  |
 | GET  | /clubes  | Club List  |

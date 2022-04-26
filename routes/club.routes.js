@@ -20,6 +20,32 @@ router.get('/', isLoggedIn, (req, res, next) => {
 
 
 // Club profile 
+router.get("/crear", (req, res, next) => {
+
+    res.render('clubs/club-create.hbs')
+
+})
+
+router.post('/crear', (req, res) => {
+    const { name, street, city, zip, image, longitude, latitude } = req.body
+
+    const location = {
+        type: "Point",
+        coordinates: [longitude, latitude]
+    }
+    const address = {
+        street: street,
+        city: city,
+        zip: zip
+    }
+
+    Club
+        .create({ name, address, image, location })
+        .then(() => {
+            res.redirect(`/clubs`)
+        })
+        .catch(err => console.log(err))
+})
 
 router.get('/:id', (req, res, next) => {
 
@@ -48,32 +74,6 @@ router.get('/:id', (req, res, next) => {
 //         .catch(err => console.log(err))
 // })
 
-router.get("/crear", (req, res, next) => {
-
-    res.render('clubs/club-create.hbs')
-
-})
-
-router.post('/crear', (req, res) => {
-    const { name, street, city, zip, image, longitude, latitude } = req.body
-
-    const location = {
-        type: "Point",
-        coordinates: [longitude, latitude]
-    }
-    const address = {
-        street: street,
-        city: city,
-        zip: zip
-    }
-
-    Club
-        .create({ name, address, image, location })
-        .then(() => {
-            res.redirect(`/clubs`)
-        })
-        .catch(err => console.log(err))
-})
 
 // router.get('/:id', (req, res) => {
 

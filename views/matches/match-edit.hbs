@@ -9,21 +9,33 @@
             <form action="/partidos/{{id}}/edit" method="POST">
 
                 <div class="mb-3">
-                    <label for="title" class="form-label">Fecha</label>
-                    <input type="text" class="form-control" id="title" name="title" value="{{date}}">
+                    <label for="date" class="form-label">Fecha</label>
+                    <input type="date" class="form-control" id="date" name="date" value="{{date}}">
                 </div>
                 <div class="mb-3">
                     <label for="genre" class="form-label">Genero</label>
-                    <input type="text" class="form-control" id="genre" name="genre" value="{{genre}}">
+                    <select id="genre" class="form-select" name="genre">
+                        <option value="Mixto">Mixto</option>
+                        <option value='Femenino'>Femenino</option>
+                        <option value='Masculino'>Masculino</option>
+                    </select>
                 </div>
-                <div class="mb-3">
-                    <label for="plot" class="form-label">Jugadores</label>
-                    <input type="text" class="form-control" id="plot" name="plot" value="{{players}}">
-                </div>
+                {{!-- <div class="mb-3">
+                    <label class="form-label">Jugadores</label>
+                    <select id="players" class="form-select" name="players">
+                        {{#each editMatch.players}}
+                        <option value="{{id}}">{{name}}</option>
+                        <form action="/partidos/{{editMatch.id}}/edit/eliminar-jugador" method="POST">
+                            <button class="btn btn-sm btn-warning" type="submit">Eliminar</button>
+                        </form>
+                        {{/each}}
+                    </select>
+                </div> --}}
+
                 <div class="mb-3">
                     <label class="form-label">Lugar</label>
-                    <select id="cast" class="form-select" name="cast">
-                        {{#each club}}
+                    <select id="club" class="form-select" name="club">
+                        {{#each editMatch.club}}
                         <option value="{{id}}">{{name}}</option>
                         {{/each}}
                     </select>
@@ -32,6 +44,14 @@
                 <button type="submit" class="btn btn-dark">Guardar edición</button>
                 <a href="/" class="btn btn-dark">Volver al incio</a>
             </form>
+
+                {{#each editMatch.players}}
+                <div value="{{id}}">{{name}}</div>
+                <h1>---{{../editMatch.id}}</h1>
+                <form action="/partidos/{{../editMatch.id}}/edit/eliminar-jugador/{{id}}" method="POST">
+                    <button class="btn btn-sm btn-warning" type="submit">Eliminar</button>
+                </form>
+                {{/each}}
 
             <hr>
 

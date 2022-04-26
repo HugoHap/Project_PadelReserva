@@ -54,6 +54,18 @@ router.get('/:id', (req, res) => {
         .catch(err => console.log(err))
 })
 
+router.post('/:id/unirse', (req, res) => {
+
+    const { id } = req.params
+
+    const {_id} = req.session.currentUser
+
+    Match
+        .findByIdAndUpdate(id, { $addToSet: { players: _id } })
+        .then(() => res.redirect("/partidos"))
+        .catch(err => console.log(err))
+})
+
 router.post('/:id/delete', (req, res) => {
 
     const { id } = req.params
@@ -72,12 +84,36 @@ router.get('/:id/edit', (req, res) => {
 
     Match
         .findById(id)
+        .populate("players")
         .populate("club")
         .then(editMatch => {
-            res.render('matches/match-edit', { editMatch
-})
+            res.render('matches/match-edit', {
+                editMatch
+            })
         })
         .catch(err => console.log(err))
 })
+
+router.post('/:id/edit', (req, res) => {
+
+    const { id } = req.params
+    const { date, genre, players, club } = req.body
+
+    Match
+        .findByIdAndUpdate(id, { date, genre, players, club })
+        .then(() => res.redirect("/partidos"))
+        .catch(err => console.log(err))
+})
+
+router.post('/:matchID/edit/eliminar-jugador/:playerID', (req, res) => {
+
+    const { matchID, playerID } = req.params
+
+    Match
+        .updateOne({ matchID }, { $pull: { players:  playerID  } })
+        .then(() => res.redirect("/partidos"))
+        .catch(err => console.log(err))
+})
+
 
 module.exports = router
