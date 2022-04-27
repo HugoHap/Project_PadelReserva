@@ -1,5 +1,5 @@
 .rounded {
-    width: 300px;
+    width: 700px;
 }
 
 .btn.btn-light {
@@ -12,4 +12,27 @@
 
 .clubs {
     margin: 100px;
+}
+
+.followersPic {
+    border-radius: 5px;
+    border: 1px, black;
+}
+
+.followersPic {
+    border-radius: 100%;
+    border: solid 1px white;
+    width: 100px;
+    height: 80px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+.container2 {
+    margin-left: 50px;
+    margin-right: 50px;
 }

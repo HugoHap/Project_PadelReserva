@@ -36,7 +36,30 @@ const clubSchema = new Schema(
             type: String
         },
         schedule: {
-            type: String
+            weekdays: {
+                from: {
+                    type: String,
+                },
+                to: {
+                    type: String,
+                },
+            },
+            weekends: {
+                from: {
+                    type: String,
+                },
+                to: {
+                    type: String,
+                },
+            },
+            holidays: {
+                from: {
+                    type: String,
+                },
+                to: {
+                    type: String,
+                },
+            },
         }
     },
 
@@ -46,5 +69,6 @@ const clubSchema = new Schema(
 );
 
 const Club = model("Club", clubSchema);
+Club.syncIndexes()
 
 module.exports = Club;
