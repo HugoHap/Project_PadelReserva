@@ -34,11 +34,8 @@ router.post('/crear', fileUploader.single('imageFile'), (req, res) => {
         type: "Point",
         coordinates: [longitude, latitude]
     }
-    const address = {
-        street: street,
-        city: city,
-        zip: zip
-    }
+    const address = { street, city, zip }
+
     const schedule = {
         weekdays: {
             from: weekdaysFrom,
@@ -115,8 +112,25 @@ router.post('/:id/editar', (req, res) => {
     const { id } = req.params
     const { name, street, city, zip, longitude, latitude, image, numberOfFields, web, phone, weekdaysFrom, weekdaysTo, weekendsFrom, weekendsTo, holidaysFrom, holidaysTo } = req.body
 
+    const schedule = {
+        weekdays: {
+            from: weekdaysFrom,
+            to: weekdaysTo,
+        },
+
+        weekends: {
+            from: weekendsFrom,
+            to: weekendsTo,
+        },
+
+        holidays: {
+            from: holidaysFrom,
+            to: holidaysTo,
+        }
+    }
+
     Club
-        .findByIdAndUpdate(id, { name, street, city, zip, longitude, latitude, image, numberOfFields, web, phone, weekdaysFrom, weekdaysTo, weekendsFrom, weekendsTo, holidaysFrom, holidaysTo }, { new: true })
+        .findByIdAndUpdate(id, { name, street, city, zip, longitude, latitude, image, numberOfFields, web, phone, schedule }, { new: true })
         .then(club => {
             res.redirect('/clubs')
         })

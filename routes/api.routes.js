@@ -7,7 +7,7 @@ router.get('/clubs', (req, res) => {
     Club
         .find()
         .then(clubs => res.json(clubs))
-        .catch(err => console.log(err))
+        .catch(err => res.status(500).json({ message: 'Server error', error: err }))
 })
 
 

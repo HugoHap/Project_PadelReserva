@@ -39,14 +39,25 @@
                     </div>
 
                     <div class="col-sm-2 mt-5">
-                        <button type="submit" class="btn btn-outline-dark"
-                            style="width: 7rem;">Enviar</button>
+                        <button type="submit" class="btn btn-outline-dark" style="width: 7rem;">Enviar</button>
                     </div>
             </form>
         </div>
     </div>
+    {{#if result.set1.team1}}
+    <div class="card" style="width: 18rem;">
+        <div class="card-header">
+            Resultado del partido
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{result.set1.team1}} - {{result.set1.team2}}</li>
+            <li class="list-group-item">{{result.set2.team1}} - {{result.set2.team2}}</li>
+            <li class="list-group-item">{{result.set3.team1}} - {{result.set3.team2}}</li>
+        </ul>
+        {{/if}}
+        <a href="/partidos/{{detMatch.id}}/resultado" class="btn btn-danger">Introducir resultado</a>
+    </div>
 
-    <a href="/partidos/{{detMatch.id}}/resultado" class="btn btn-danger">Introducir resultado</a>
 
     <hr>
 

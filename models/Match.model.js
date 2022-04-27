@@ -6,31 +6,31 @@ const matchSchema = new Schema(
             set1: {
                 team1: {
                     type: Number,
-                    default: 0
+                    default: null
                 },
                 team2: {
                     type: Number,
-                    default: 0
+                    default: null
                 },
             },
             set2: {
                 team1: {
                     type: Number,
-                    default: 0
+                    default: null
                 },
                 team2: {
                     type: Number,
-                    default: 0
+                    default: null
                 },
             },
             set3: {
                 team1: {
                     type: Number,
-                    default: 0
+                    default: null
                 },
                 team2: {
                     type: Number,
-                    default: 0
+                    default: null
                 },
             },
         },
@@ -64,5 +64,6 @@ const matchSchema = new Schema(
 );
 
 const Match = model("Match", matchSchema);
+Match.syncIndexes()
 
 module.exports = Match;
