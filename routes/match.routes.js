@@ -79,16 +79,27 @@ router.get('/:id/edit', (req, res) => {
 
     const { id } = req.params
 
-    Match
-        .findById(id)
-        .populate("players")
-        .populate("club")
-        .then(editMatch => {
-            res.render('matches/match-edit', {
-                editMatch
-            })
-        })
+
+    const promisesEdit = [
+        Match.findById(id).populate("players").populate("club"),
+        Club.find(),
+    ]
+
+    Promise
+        .all(promisesEdit)
+        .then(([editMatch, clubs]) => res.render('matches/match-edit', { editMatch, clubs }))
         .catch(err => console.log(err))
+
+
+    // Match
+    //     .findById(id)
+    //     .populate("players")
+    //     .populate("club")
+    //     .then(editMatch => {
+    //         console.log(editMatch);
+    //         res.render('matches/match-edit', {editMatch })
+    //     })
+    //     .catch(err => console.log(err))
 })
 
 router.post('/:id/edit', (req, res) => {

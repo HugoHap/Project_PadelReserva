@@ -54,7 +54,7 @@ router.post('/iniciar-sesion', (req, res, next) => {
 
 
 router.post('/cerrar-sesion', (req, res, next) => {
-    req.session.destroy(() => res.redirect('/iniciar-sesion'))
+    req.session.destroy(() => res.redirect('/'))
 })
 
 module.exports = router

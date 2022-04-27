@@ -57,7 +57,7 @@ router.post('/crear', fileUploader.single('imageFile'), (req, res) => {
     }
 
     Club
-        .create({ name, address, image, location, schedule, numberOfFields, web, phone, image: path })
+        .create({ name, address, location, schedule, numberOfFields, web, phone, image: path })
         .then(() => {
             res.redirect(`/clubs`)
         })

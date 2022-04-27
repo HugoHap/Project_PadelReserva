@@ -6,7 +6,7 @@
 
             <hr>
 
-            <form action="/partidos/{{id}}/edit" method="POST">
+            <form action="/partidos/{{editMatch.id}}/edit" method="POST">
 
                 <div class="mb-3">
                     <label for="date" class="form-label">Fecha</label>
@@ -24,7 +24,7 @@
                 <div class="mb-3">
                     <label class="form-label">Lugar</label>
                     <select id="club" class="form-select" name="club">
-                        {{#each editMatch.club}}
+                        {{#each clubs.club}}
                         <option value="{{id}}">{{name}}</option>
                         {{/each}}
                     </select>
@@ -36,7 +36,6 @@
 
                 {{#each editMatch.players}}
                 <div value="{{id}}">{{name}}</div>
-                <h1>---{{../editMatch.id}}</h1>
                 <form action="/partidos/{{../editMatch.id}}/edit/eliminar-jugador/{{id}}" method="POST">
                     <button class="btn btn-sm btn-warning" type="submit">Eliminar</button>
                 </form>
