@@ -13,6 +13,10 @@ const commentSchema = new Schema(
         date: {
             type: Date,
         },
+        match: {
+            type: Schema.Types.ObjectId,
+            ref: 'Match'
+        }
     },
     {
         timestamps: true,

@@ -27,10 +27,10 @@ const matchSchema = new Schema(
             type: String,
             enum: ['Mixto', 'Femenino', 'Masculino']
         },
-        comments: [{
-            type: Schema.Types.ObjectId,
-            ref: 'Comment'
-        }]
+        // comments: [{
+        //     type: Schema.Types.ObjectId,
+        //     ref: 'Comment'
+        // }]
     },
 
     {

@@ -36,6 +36,9 @@ app.use("/clubs", clubRoutes);
 const apiRouter = require('./routes/api.routes');
 app.use('/api', apiRouter);
 
+const commentRoutes = require('./routes/comment.routes');
+app.use('/comentario', commentRoutes);
+
 require("./error-handling")(app);
 
 module.exports = app;

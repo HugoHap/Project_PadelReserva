@@ -9,7 +9,7 @@
             {{!-- <a href="/clubs/{{_id}}/favourite" class="btn btn-danger">Seguir</a> --}}
 
 
-            <form action="/clubs/{{_id}}/favourite" method="POST">
+            <form action="/clubs/{{club._id}}/favourite" method="POST">
                 <button class="btn btn-danger" type="submit">Seguir</button>
             </form>
 
@@ -20,7 +20,7 @@
             <button type="button" class="btn btn-dark">Como llegar</button>
             <button type="button" class="btn btn-dark">Web</button>
             <button type="button" class="btn btn-dark">Llamar</button>
-            <a href="/clubs/{{_id}}/editar" class="btn btn-dark">Editar perfil</a>
+            <a href="/clubs/{{club._id}}/editar" class="btn btn-dark">Editar perfil</a>
             {{#each match}}
             <p>{{match._id}} </p>
             <p>{{date}} </p>

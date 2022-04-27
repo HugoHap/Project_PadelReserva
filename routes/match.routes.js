@@ -2,6 +2,7 @@ const router = require("express").Router()
 
 const Club = require("../models/Club.model")
 const Match = require("./../models/Match.model")
+const Comment = require("./../models/Comment.model")
 
 const User = require("./../models/User.model")
 
@@ -40,18 +41,42 @@ router.post('/crear', (req, res) => {
         .catch(err => console.log(err))
 })
 
-router.get('/:id', (req, res) => {
+// router.get('/:id', (req, res) => {
 
+//     const { id } = req.params
+
+//     const promises = [
+//         Match.findById(id).populate("club").populate("players"),
+//         Comment.find({ match: id })
+//     ]
+
+//     Match
+//         .findById(id)
+//         .populate("club")
+//         .populate("players")
+//         .then(detMatch => {
+//             Comment
+//                 .find({ match: id })
+//                 .then(comments => {
+//                     res.render('matches/match-details', detMatch, comments)
+//                 })
+//                 .catch(err => console.log(err))
+
+//         })
+//         .catch(err => console.log(err))
+
+    
+// })
+
+router.get('/:id', (req, res, next) => {
     const { id } = req.params
-
-    Match
-        .findById(id)
-        .populate("club")
-        .populate("players")
-        // .populate("")
-        .then(detMatch => {
-            res.render('matches/match-details', detMatch)
-        })
+    const promises = [
+        Match.findById(id).populate("club").populate("players"),
+        Comment.find({ 'match': { $eq: id } }).populate("user"),
+    ]
+    Promise
+        .all(promises)
+        .then(([detMatch, comments]) => res.render('matches/match-details', { detMatch, comments }))
         .catch(err => console.log(err))
 })
 
@@ -59,7 +84,7 @@ router.post('/:id/unirse', (req, res) => {
 
     const { id } = req.params
 
-    const {_id} = req.session.currentUser
+    const { _id } = req.session.currentUser
 
     Match
         .findByIdAndUpdate(id, { $addToSet: { players: _id } })
@@ -111,7 +136,7 @@ router.post('/:matchID/edit/eliminar-jugador/:playerID', (req, res) => {
     const { matchID, playerID } = req.params
 
     Match
-        .updateOne({ matchID }, { $pull: { players:  playerID  } })
+        .updateOne({ matchID }, { $pull: { players: playerID } })
         .then(() => res.redirect("/partidos"))
         .catch(err => console.log(err))
 })

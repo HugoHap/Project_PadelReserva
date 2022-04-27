@@ -7,12 +7,12 @@
     <div class="row">
         <div class="col-md-8">
             <h3>Detalles</h3>
-            <p>Fecha:{{date}}</p>
-            <p>Lugar:{{club.name}}</p>
+            <p>Fecha:{{detMatch.date}}</p>
+            <p>Lugar:{{detMatch.club.name}}</p>
         </div>
         <div class="col-md-4">
             <h3>Jugadores</h3>
-            {{#each players}}
+            {{#each detMatch.players}}
             <p>{{name}}</p>
             {{/each}}
         </div>
@@ -21,13 +21,43 @@
         <button class="btn btn-dark" type="submit">Unirse</button>
     </form>
 
+            {{#each comments}}
+            <p>{{user.name}}</p>
+            <p>{{content}}</p>
+            {{/each}}
+
     <hr>
 
-    <form action="/partidos/{{id}}/delete" method="POST">
+    <div class="container">
+        <div class="row reviews-form">
+            <form action="/comentario/{{detMatch.id}}/crear" method="POST">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="exampleFormControlTextarea1" class="form-label">
+                            <h6>Chat de partido</h6>
+                        </label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="content"
+                            type="text"></textarea>
+                    </div>
+
+                    <div class="col-sm-2 mt-5">
+                        <button type="submit" class="btn btn-outline-dark send-review-button"
+                            style="width: 7rem;">Enviar</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <hr>
+
+
+    <form action="/partidos/{{detMatch.id}}/delete" method="POST">
         <button class="btn btn-sm btn-warning" type="submit">Eliminar</button>
     </form>
 
-    <a href="/partidos/{{id}}/edit" class="btn btn-dark">Editar partido</a>
+    <a href="/partidos/{{detMatch.id}}/edit" class="btn btn-dark">Editar partido</a>
 
     <a href="/partidos" class="btn btn-dark">Volver a la lista</a>
 

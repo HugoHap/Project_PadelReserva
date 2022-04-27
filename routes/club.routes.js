@@ -58,36 +58,18 @@ router.get('/:id', (req, res, next) => {
 
     const { id } = req.params
     const user = req.session.currentUser
-
+    
     Club
-        .findById(id)
-        .then(club => {
-
-            Match
-                .find({ 'club': { $eq: id } })
-                .then(match => {
-                    res.render('clubs/club-details', { club, match })
-                })
-                .catch(err => console.log(err))
-        })
-})
-
-
-// Favourite club 
-
-router.post('/:id/favourite', (req, res, next) => {
-
-    const { id } = req.params
-    const { _id } = req.session.currentUser
-
-    User
-        .findByIdAndUpdate(_id, { $addToSet: { favouriteClubs: id } })
-        .then(() => {
-            res.redirect(`/clubs/${id}`)
+    .findById(id)
+    .then(club => {
+        Match
+        .find({ 'club': { $eq: id } })
+        .then(match => {
+            res.render('clubs/club-details', { club, match })
         })
         .catch(err => console.log(err))
+    })
 })
-
 
 // Edit club
 
@@ -115,6 +97,23 @@ router.post('/:id/editar', (req, res) => {
         })
         .catch(err => console.log(err))
 })
+
+// Favourite club 
+
+router.post('/:id/favourite', (req, res, next) => {
+
+    const { id } = req.params
+    const { _id } = req.session.currentUser
+
+    User
+        .findByIdAndUpdate(_id, { $addToSet: { favouriteClubs: id } })
+        .then(() => {
+            res.redirect(`/clubs/${id}`)
+        })
+        .catch(err => console.log(err))
+})
+
+
 
 
 // Delete club 
