@@ -36,3 +36,18 @@
     margin-left: 50px;
     margin-right: 50px;
 }
+
+.home {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    background-color: green;
+    background-image: url(fondopadel.webp);
+    background-repeat: no-repeat;
+}
+
+.backgroundimg {
+    width: 1450px;
+    object-fit: cover;
+    margin-left: 0px;
+}

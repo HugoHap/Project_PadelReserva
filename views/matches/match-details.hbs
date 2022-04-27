@@ -1,7 +1,5 @@
 <div class="container">
 
-    {{!-- <h2>Detalles de {{title}}</h2> --}}
-
     <hr>
 
     <div class="row">
@@ -21,10 +19,10 @@
         <button class="btn btn-dark" type="submit">Unirse</button>
     </form>
 
-            {{#each comments}}
-            <p>{{user.name}}</p>
-            <p>{{content}}</p>
-            {{/each}}
+    {{#each comments}}
+    <p>{{user.name}}</p>
+    <p>{{content}}</p>
+    {{/each}}
 
     <hr>
 
@@ -48,10 +46,9 @@
         </div>
     </div>
 
-
+    <a href="/partidos/{{detMatch.id}}/resultado" class="btn btn-danger">Introducir resultado</a>
 
     <hr>
-
 
     <form action="/partidos/{{detMatch.id}}/delete" method="POST">
         <button class="btn btn-sm btn-warning" type="submit">Eliminar</button>
@@ -62,7 +59,6 @@
     <a href="/partidos" class="btn btn-dark">Volver a la lista</a>
 
 </div>
-
 
 <style>
     #clubsMap {
@@ -76,7 +72,6 @@
         <figure id="clubsMap"></figure>
     </div>
 </div>
-
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/js/club-map.js"></script>

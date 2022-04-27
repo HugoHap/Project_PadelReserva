@@ -3,8 +3,36 @@ const { Schema, model } = require("mongoose");
 const matchSchema = new Schema(
     {
         result: {
-            type: Number,
-            default: 0
+            set1: {
+                team1: {
+                    type: Number,
+                    default: 0
+                },
+                team2: {
+                    type: Number,
+                    default: 0
+                },
+            },
+            set2: {
+                team1: {
+                    type: Number,
+                    default: 0
+                },
+                team2: {
+                    type: Number,
+                    default: 0
+                },
+            },
+            set3: {
+                team1: {
+                    type: Number,
+                    default: 0
+                },
+                team2: {
+                    type: Number,
+                    default: 0
+                },
+            },
         },
         date: {
             type: Date
@@ -27,10 +55,6 @@ const matchSchema = new Schema(
             type: String,
             enum: ['Mixto', 'Femenino', 'Masculino']
         },
-        // comments: [{
-        //     type: Schema.Types.ObjectId,
-        //     ref: 'Comment'
-        // }]
     },
 
     {

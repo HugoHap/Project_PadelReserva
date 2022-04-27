@@ -99,7 +99,8 @@ router.post('/:id/favourite', (req, res, next) => {
             res.redirect(`/clubs/${id}`)
         })
         .catch(err => console.log(err))
-    })
+})
+
 
 // Edit club
 
@@ -128,6 +129,7 @@ router.post('/:id/editar', (req, res) => {
         .catch(err => console.log(err))
 })
 
+
 // Favourite club 
 
 router.post('/:id/favourite', (req, res, next) => {
@@ -142,8 +144,6 @@ router.post('/:id/favourite', (req, res, next) => {
         })
         .catch(err => console.log(err))
 })
-
-
 
 
 // Delete club 
