@@ -4,8 +4,6 @@ const Club = require("../models/Club.model")
 const Match = require("./../models/Match.model")
 const Comment = require("./../models/Comment.model")
 
-const User = require("./../models/User.model")
-
 
 router.get('/', (req, res) => {
     Match
@@ -16,7 +14,6 @@ router.get('/', (req, res) => {
         })
         .catch(err => console.log(err))
 })
-
 
 router.get("/crear", (req, res, next) => {
 
@@ -41,39 +38,14 @@ router.post('/crear', (req, res) => {
         .catch(err => console.log(err))
 })
 
-// router.get('/:id', (req, res) => {
-
-//     const { id } = req.params
-
-//     const promises = [
-//         Match.findById(id).populate("club").populate("players"),
-//         Comment.find({ match: id })
-//     ]
-
-//     Match
-//         .findById(id)
-//         .populate("club")
-//         .populate("players")
-//         .then(detMatch => {
-//             Comment
-//                 .find({ match: id })
-//                 .then(comments => {
-//                     res.render('matches/match-details', detMatch, comments)
-//                 })
-//                 .catch(err => console.log(err))
-
-//         })
-//         .catch(err => console.log(err))
-
-    
-// })
-
 router.get('/:id', (req, res, next) => {
     const { id } = req.params
+
     const promises = [
         Match.findById(id).populate("club").populate("players"),
         Comment.find({ 'match': { $eq: id } }).populate("user"),
     ]
+
     Promise
         .all(promises)
         .then(([detMatch, comments]) => res.render('matches/match-details', { detMatch, comments }))
@@ -83,7 +55,6 @@ router.get('/:id', (req, res, next) => {
 router.post('/:id/unirse', (req, res) => {
 
     const { id } = req.params
-
     const { _id } = req.session.currentUser
 
     Match

@@ -2,7 +2,6 @@ const router = require("express").Router()
 const User = require("../models/User.model")
 const { isLoggedIn } = require('../middleware/route-guard.js')
 
-
 // User profile 
 
 router.get('/', isLoggedIn, (req, res, next) => {
@@ -15,8 +14,6 @@ router.get('/', isLoggedIn, (req, res, next) => {
         })
         .catch(err => console.log(err))
 })
-
-
 
 // Edit user profile 
 
@@ -44,8 +41,6 @@ router.post('/:id/editar', (req, res, next) => {
         })
         .catch(err => console.log(err))
 })
-
-
 
 // Delete profile
 

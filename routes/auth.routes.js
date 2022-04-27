@@ -3,27 +3,26 @@ const bcrypt = require('bcryptjs')
 const User = require("../models/User.model")
 const saltRounds = 10
 
+const fileUploader = require("../config/cloudinary.config")
 
-// Signup
 
 router.get('/registro', (req, res, next) => {
     res.render('auth/signup')
 })
 
-router.post('/registro', (req, res, next) => {
+router.post('/registro', fileUploader.single('avatarFile'), (req, res, next) => {
 
     const { password } = req.body
+    const { path } = req.file
 
     bcrypt
         .genSalt(saltRounds)
         .then(salt => bcrypt.hash(password, salt))
-        .then(hashedPassword => User.create({ ...req.body, password: hashedPassword }))
+        .then(hashedPassword => User.create({ ...req.body, avatar: path, password: hashedPassword }))
         .then(() => res.redirect('/'))
         .catch(error => next(error))
 })
 
-
-// Login
 
 router.get('/iniciar-sesion', (req, res, next) => {
     res.render('auth/login')
@@ -53,8 +52,6 @@ router.post('/iniciar-sesion', (req, res, next) => {
         .catch(error => next(error))
 })
 
-
-// Logout
 
 router.post('/cerrar-sesion', (req, res, next) => {
     req.session.destroy(() => res.redirect('/iniciar-sesion'))

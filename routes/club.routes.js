@@ -6,8 +6,7 @@ const Match = require("./../models/Match.model")
 
 const { isLoggedIn } = require('../middleware/route-guard.js')
 
-
-// Clubs list
+const fileUploader = require("../config/cloudinary.config")
 
 router.get('/', isLoggedIn, (req, res, next) => {
 
@@ -20,16 +19,16 @@ router.get('/', isLoggedIn, (req, res, next) => {
 })
 
 
-// Club create
-
 router.get("/crear", (req, res, next) => {
 
     res.render('clubs/club-create.hbs')
 
 })
 
-router.post('/crear', (req, res) => {
+router.post('/crear', fileUploader.single('imageFile'), (req, res) => {
     const { name, street, city, zip, image, longitude, latitude, numberOfFields, web, phone, weekdaysFrom, weekdaysTo, weekendsFrom, weekendsTo, holidaysFrom, holidaysTo } = req.body
+
+    const { path } = req.file
 
     const location = {
         type: "Point",
@@ -58,15 +57,13 @@ router.post('/crear', (req, res) => {
     }
 
     Club
-        .create({ name, address, image, location, schedule, numberOfFields, web, phone, })
+        .create({ name, address, image, location, schedule, numberOfFields, web, phone, image: path })
         .then(() => {
             res.redirect(`/clubs`)
         })
         .catch(err => console.log(err))
 })
 
-
-// Club profile 
 
 router.get('/:id', (req, res, next) => {
 
@@ -86,8 +83,6 @@ router.get('/:id', (req, res, next) => {
 })
 
 
-// Favourite club 
-
 router.post('/:id/favourite', (req, res, next) => {
 
     const { id } = req.params
@@ -101,7 +96,6 @@ router.post('/:id/favourite', (req, res, next) => {
         .catch(err => console.log(err))
     })
 
-// Edit club
 
 router.get('/:id/editar', (req, res, next) => {
 
@@ -128,7 +122,6 @@ router.post('/:id/editar', (req, res) => {
         .catch(err => console.log(err))
 })
 
-// Favourite club 
 
 router.post('/:id/favourite', (req, res, next) => {
 
@@ -143,10 +136,6 @@ router.post('/:id/favourite', (req, res, next) => {
         .catch(err => console.log(err))
 })
 
-
-
-
-// Delete club 
 
 router.post('/:id/eliminar', (req, res) => {
 

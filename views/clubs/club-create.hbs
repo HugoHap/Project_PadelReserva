@@ -6,7 +6,7 @@
 
             <hr>
 
-            <form action="/clubs/crear" method="POST">
+            <form action="/clubs/crear" method="POST" enctype="multipart/form-data">
 
                 <div class="mb-3">
                     <label for="name" class="form-label">Nombre</label>
@@ -24,17 +24,17 @@
                     <label for="zip" class="form-label">Código Postal</label>
                     <input type="text" class="form-control" id="zip" name="zip">
                 </div>
-                <div class="mb-3">
+                <div class="mb-3" hidden>
                     <label for="latitude" class="form-label">Latitud</label>
                     <input type="text" class="form-control" id="latitudeIn" name="latitude">
                 </div>
-                <div class="mb-3">
+                <div class="mb-3" hidden>
                     <label for="longitude" class="form-label">Longitud</label>
                     <input type="text" class="form-control" id="longitudeIn" name="longitude">
                 </div>
                 <div class="mb-3">
                     <label for="image" class="form-label">Imagen</label>
-                    <input type="text" class="form-control" id="image" name="image">
+                    <input type="file" class="form-control" id="image" name="imageFile">
                 </div>
                 <div class="mb-3">
                     <label for="numberOfFields" class="form-label">Pistas disponibles</label>

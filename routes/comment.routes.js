@@ -19,7 +19,6 @@ router.post('/:id/crear', (req, res, next) => {
 })
 
 
-
 router.post('/:id/eliminar', (req, res, next) => {
     
     const { id } = req.params
