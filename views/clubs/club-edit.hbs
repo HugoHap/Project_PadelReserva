@@ -25,16 +25,6 @@
                     <input type="text" class="form-control" id="zip" name="zip" value="{{address.zip}}">
                 </div>
                 <div class="mb-3">
-                    <label for="longitude" class="form-label">Longitud</label>
-                    <input type="text" class="form-control" id="longitude" name="longitude"
-                        value="{{location.coordinates.[1]}}">
-                </div>
-                <div class="mb-3">
-                    <label for="latitude" class="form-label">Latitud</label>
-                    <input type="text" class="form-control" id="latitude" name="latitude"
-                        value="{{location.coordinates.[0]}}">
-                </div>
-                <div class="mb-3">
                     <label for="numberOfFields" class="form-label">Pistas disponibles</label>
                     <input type="text" class="form-control" id="numberOfFields" name="numberOfFields"
                         value="{{numberOfFields}}">
@@ -46,10 +36,6 @@
                 <div class="mb-3">
                     <label for="phone" class="form-label">Teléfono</label>
                     <input type="text" class="form-control" id="phone" name="phone" value="{{phone}}">
-                </div>
-                <div class="mb-3">
-                    <label for="schedule" class="form-label">Horario</label>
-                    <input type="text" class="form-control" id="schedule" name="schedule" value="{{schedule}}">
                 </div>
 
                 <h6>Horario</h6>
@@ -69,7 +55,7 @@
                     <div class="col">
                         <label for="weekendsFrom" class="form-label">Desde</label>
                         <input type="time" class="form-control" id="weekendsFrom" name="weekendsFrom"
-                            value=" {{schedule.weekends.from}}">
+                            value="{{schedule.weekends.from}}">
                     </div>
                     <div class="col">
                         <label for="weekendsTo" class="form-label">Hasta</label>
@@ -80,19 +66,19 @@
                     <div class="col">
                         <label for="holidaysFrom" class="form-label">Desde</label>
                         <input type="time" class="form-control" id="holidaysFrom" name="holidaysFrom"
-                            value=" {{schedule.holidays.from}}">
+                            value="{{schedule.holidays.from}}">
                     </div>
                     <div class="col">
                         <label for="holidaysTo" class="form-label">Hasta</label>
                         <input type="time" class="form-control" id="holidaysTo" name="holidaysTo"
-                            value=" {{schedule.holidays.to}}">
+                            value="{{schedule.holidays.to}}">
                     </div>
 
+                </div>
 
 
 
-
-
+                <div class="row align-items-center">
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Imagen</label>
                         <input class="form-control" type="file" id="formFile" value="{{image}}">
@@ -101,20 +87,10 @@
                     <button type=" submit" class="btn btn-dark">Editar</button>
                     <a href="/clubs" class="btn btn-dark">Volver a la lista de clubs</a>
             </form>
-            <hr>
-            <form action="/clubs/{{_id}}/eliminar" method="POST">
-                <button class="btn btn-dark" type="submit">Eliminar club</button>
-            </form>
-
-
-
-
-
-
-
-
         </div>
+        <hr>
+        <form action="/clubs/{{_id}}/eliminar" method="POST">
+            <button class="btn btn-dark" type="submit">Eliminar club</button>
+        </form>
     </div>
-
-
 </div>

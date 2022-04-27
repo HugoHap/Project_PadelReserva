@@ -1,10 +1,14 @@
 const router = require("express").Router()
 const User = require("../models/User.model")
-const { isLoggedIn } = require('../middleware/route-guard.js')
+const { isLoggedIn } = require('../middleware/route-guard')
+const { isLoggedOut } = require('../middleware/route-guard')
+
+
 
 // User profile 
 
 router.get('/', isLoggedIn, (req, res, next) => {
+
     const { _id } = req.session.currentUser
 
     User
@@ -17,13 +21,15 @@ router.get('/', isLoggedIn, (req, res, next) => {
 
 // Edit user profile 
 
-router.get('/:id/editar', (req, res, next) => {
+router.get('/:id/editar', isLoggedIn, (req, res, next) => {
+
     const { id } = req.params
+    const isMine = req.session.currentUser._id === id
 
     User
         .findById(id)
         .then(player => {
-            res.render('user/edit-form', player)
+            res.render('user/edit-form', player, isMine)
         })
         .catch(err => console.log(err))
 })
@@ -45,6 +51,7 @@ router.post('/:id/editar', (req, res, next) => {
 // Delete profile
 
 router.post('/:id/eliminar', (req, res, next) => {
+
     const { id } = req.params
 
     User

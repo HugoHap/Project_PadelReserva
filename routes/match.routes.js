@@ -3,23 +3,31 @@ const router = require("express").Router()
 const Club = require("../models/Club.model")
 const Match = require("./../models/Match.model")
 const Comment = require("./../models/Comment.model")
+const { isLoggedIn } = require('../middleware/route-guard')
 
 
-router.get('/', (req, res) => {
+// Matches list 
+
+router.get('/', isLoggedIn, (req, res) => {
+
     Match
         .find()
-        .populate("club")
+        .populate("club", "players")
         .then(matches => {
-            res.render('matches/match-list.hbs', { matches })
+            console.log(matches)
+            res.render('matches/match-list', { matches })
         })
         .catch(err => console.log(err))
 })
 
-router.get("/crear", (req, res, next) => {
+
+// Create match 
+
+router.get("/crear", isLoggedIn, (req, res, next) => {
 
     Club
         .find()
-        .then(clubes => res.render('matches/match-create.hbs', { clubes }))
+        .then(clubes => res.render('matches/match-create', { clubes }))
         .catch(() =>
             console.log(err)
         )
@@ -38,6 +46,9 @@ router.post('/crear', (req, res) => {
         .catch(err => console.log(err))
 })
 
+
+// Match details
+
 router.get('/:id', (req, res, next) => {
     const { id } = req.params
 
@@ -52,6 +63,9 @@ router.get('/:id', (req, res, next) => {
         .catch(err => console.log(err))
 })
 
+
+// Join match 
+
 router.post('/:id/unirse', (req, res) => {
 
     const { id } = req.params
@@ -62,6 +76,9 @@ router.post('/:id/unirse', (req, res) => {
         .then(() => res.redirect("/partidos"))
         .catch(err => console.log(err))
 })
+
+
+// Delete match 
 
 router.post('/:id/delete', (req, res) => {
 
@@ -81,8 +98,7 @@ router.get('/:id/edit', (req, res) => {
 
     Match
         .findById(id)
-        .populate("players")
-        .populate("club")
+        .populate("players", "club")
         .then(editMatch => {
             res.render('matches/match-edit', {
                 editMatch
@@ -90,6 +106,9 @@ router.get('/:id/edit', (req, res) => {
         })
         .catch(err => console.log(err))
 })
+
+
+// Edit match 
 
 router.post('/:id/edit', (req, res) => {
 
@@ -116,12 +135,19 @@ router.post('/:matchID/edit/eliminar-jugador/:playerID', (req, res) => {
 // Results form
 
 router.get('/:id/resultado', (req, res, next) => {
-    res.render('matches/result-form')
+    const { id } = req.params
+
+    Match
+        .findById(id)
+        .then(match => res.render('matches/result-form', match))
+        .catch(err => console.log(err))
 });
 
 router.post('/:id/resultado', (req, res, next) => {
     const { id } = req.params
     const { set1team1, set1team2, set2team1, set2team2, set3team1, set3team2 } = req.body
+
+    console.log('el id del partido es ------->', id)
 
     const result = {
         set1: {
@@ -139,12 +165,13 @@ router.post('/:id/resultado', (req, res, next) => {
     }
 
     Match
-        .create(id, { set1team1, set1team2, set2team1, set2team2, set3team1, set3team2 })
+        .findByIdAndUpdate(id, { result }, { new: true })
         .then(result => {
-            res.redirect('/partidos/:id')
+            res.render('matches/match-details', result)
         })
         .catch(err => console.log(err))
 });
+
 
 module.exports = router
 
