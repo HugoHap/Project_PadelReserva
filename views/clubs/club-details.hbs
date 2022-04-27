@@ -1,72 +1,104 @@
 <div class="container">
 
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <img src="/images/club-padel1.jpeg" class="figure-img img-fluid rounded" alt="Foto del club">
-            <h2>{{club.name}}</h2>
-            <p>{{club.address.street}}, {{club.address.city}}, {{club.address.zip}}</p>
-            {{!-- <button type="button" class="btn btn-danger">Seguir</button> --}}
-            {{!-- <a href="/clubs/{{_id}}/favourite" class="btn btn-danger">Seguir</a> --}}
+        </div>
 
 
-            <form action="/clubs/{{club._id}}/favourite" method="POST">
+        <div class="col-md-6">
+            <h2>{{clubInfo.name}}</h2>
+            <p>{{clubInfo.address.street}}, {{clubInfo.address.city}}, {{clubInfo.address.zip}}</p>
+
+
+            {{!-- <span id=heart><i class="fa fa-heart-o" aria-hidden="true"></i> </span> --}}
+            <form action="/clubs/{{clubInfo._id}}/favourite" method="POST">
                 <button class="btn btn-danger" type="submit">Seguir</button>
             </form>
 
-            {{#each player}}
-            <img src="/images/club-padel1.jpeg" class="rounded mx-auto d-block" alt="...">
-            {{/each}}
-            <p>11 Pistas disponibles </p>
-            <button type="button" class="btn btn-dark">Como llegar</button>
-            <button type="button" class="btn btn-dark">Web</button>
-            <button type="button" class="btn btn-dark">Llamar</button>
-            <a href="/clubs/{{club._id}}/editar" class="btn btn-dark">Editar perfil</a>
-            {{#each match}}
-            <p>{{match._id}} </p>
-            <p>{{date}} </p>
-            {{/each}}
+            <p>Pistas disponibles {{clubInfo.numberOfFields}}</p>
+            <a href="{{clubInfo.web}}" class="btn btn-dark">Web</a>
+            <a href="{{clubInfo.phone}}" class="btn btn-dark">Llamar</a>
+            <a href="/clubs/{{clubInfo._id}}/editar" class="btn btn-dark">Editar perfil</a>
         </div>
     </div>
+</div>
 
-    <style>
-        #clubsMap {
-            height: 300px;
-            background-color: red;
-        }
-    </style>
-
-    <figure id="clubsMap"></figure>
-
-
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Horarios</th>
-            </tr>
-        <tbody>
-            <tr>
-                <th scope="row">Lunes - Viernes</th>
-                <td></td>
-                <td></td>
-                <td>08:00 - 23:00</td>
-            </tr>
-            <tr>
-                <th scope="row">Sábado - Domingo </th>
-                <td></td>
-                <td></td>
-                <td>09:00 - 22:00</td>
-            </tr>
-            <tr>
-                <th scope="row">* Festivos</th>
-                <td colspan="2"></td>
-                <td>09:00 - 14:00</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="container">
+    <div class="row align-items-center">
+        {{#each followers}}
+        <img src="{{avatar}}" class="followersPic" alt="user avatar">
+        {{/each}}
+    </div>
+</div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/js/club-map.js"></script>
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtf8mk6VyrR7KMMLz5WRmqhcbrtuTYDCg&callback=initMap"></script>
+
+<div class="container2">
+    <div class="row">
+        {{#each matchInfo}}
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{date}}</h5>
+                    <p class="card-text">{{genre}}</p>
+                    <a href="/partidos/{{_id}}" class="btn btn-primary">Ir al partido</a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+
+
+
+<style>
+    #clubsMap {
+        height: 300px;
+        background-color: red;
+    }
+</style>
+
+<div class="container">
+    <div class="row align-items-center">
+        <figure id="clubsMap"></figure>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row align-items-center">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Horarios</th>
+                </tr>
+            <tbody>
+                <tr>
+                    <th scope="row">Lunes - Viernes</th>
+                    <td></td>
+                    <td></td>
+                    <td>{{clubInfo.schedule.weekdays.from}} - {{clubInfo.schedule.weekdays.to}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Sábado - Domingo </th>
+                    <td></td>
+                    <td></td>
+                    <td>{{clubInfo.schedule.weekends.from}} - {{clubInfo.schedule.weekends.to}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">* Festivos</th>
+                    <td colspan="2"></td>
+                    <td>{{clubInfo.schedule.holidays.from}} - {{clubInfo.schedule.holidays.to}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/js/club-map.js"></script>
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtf8mk6VyrR7KMMLz5WRmqhcbrtuTYDCg&callback=initMap"></script>

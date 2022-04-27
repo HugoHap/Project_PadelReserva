@@ -34,20 +34,72 @@
                     <input type="text" class="form-control" id="latitude" name="latitude"
                         value="{{location.coordinates.[0]}}">
                 </div>
-
-                {{!--
                 <div class="mb-3">
-                    <label for="image" class="form-label">Foto</label>
-                    <input class="form-control form-control-sm" id="image" type="image" value="{{image}}">
-                </div> --}}
-
+                    <label for="numberOfFields" class="form-label">Pistas disponibles</label>
+                    <input type="text" class="form-control" id="numberOfFields" name="numberOfFields"
+                        value="{{numberOfFields}}">
+                </div>
                 <div class="mb-3">
-                    <label for="formFile" class="form-label">Imagen</label>
-                    <input class="form-control" type="file" id="formFile" value="{{image}}">
+                    <label for="web" class="form-label">Web</label>
+                    <input type="text" class="form-control" id="web" name="web" value="{{web}}">
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Teléfono</label>
+                    <input type="text" class="form-control" id="phone" name="phone" value="{{phone}}">
+                </div>
+                <div class="mb-3">
+                    <label for="schedule" class="form-label">Horario</label>
+                    <input type="text" class="form-control" id="schedule" name="schedule" value="{{schedule}}">
                 </div>
 
-                <button type=" submit" class="btn btn-dark">Editar</button>
-                <a href="/clubs" class="btn btn-dark">Volver a la lista de clubs</a>
+                <h6>Horario</h6>
+                <div class="row align-items-center">
+                    <p>Lunes - Viernes</p>
+                    <div class="col">
+                        <label for="weekdaysFrom" class="form-label">Desde</label>
+                        <input type="time" class="form-control" id="weekdaysFrom" name="weekdaysFrom"
+                            value="{{schedule.weekdays.from}}">
+                    </div>
+                    <div class="col">
+                        <label for="weekdays.to" class="form-label">Hasta</label>
+                        <input type="time" class="form-control" id="weekdays.to" name="weekdaysTo"
+                            value="{{schedule.weekdays.to}}">
+                    </div>
+                    <p>Sábado - Domingo</p>
+                    <div class="col">
+                        <label for="weekendsFrom" class="form-label">Desde</label>
+                        <input type="time" class="form-control" id="weekendsFrom" name="weekendsFrom"
+                            value=" {{schedule.weekends.from}}">
+                    </div>
+                    <div class="col">
+                        <label for="weekendsTo" class="form-label">Hasta</label>
+                        <input type="time" class="form-control" id="weekendsTo" name="weekendsTo"
+                            value="{{schedule.weekends.to}}">
+                    </div>
+                    <p>Festivos</p>
+                    <div class="col">
+                        <label for="holidaysFrom" class="form-label">Desde</label>
+                        <input type="time" class="form-control" id="holidaysFrom" name="holidaysFrom"
+                            value=" {{schedule.holidays.from}}">
+                    </div>
+                    <div class="col">
+                        <label for="holidaysTo" class="form-label">Hasta</label>
+                        <input type="time" class="form-control" id="holidaysTo" name="holidaysTo"
+                            value=" {{schedule.holidays.to}}">
+                    </div>
+
+
+
+
+
+
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Imagen</label>
+                        <input class="form-control" type="file" id="formFile" value="{{image}}">
+                    </div>
+
+                    <button type=" submit" class="btn btn-dark">Editar</button>
+                    <a href="/clubs" class="btn btn-dark">Volver a la lista de clubs</a>
             </form>
             <hr>
             <form action="/clubs/{{_id}}/eliminar" method="POST">

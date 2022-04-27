@@ -20,7 +20,8 @@ router.get('/', isLoggedIn, (req, res, next) => {
 })
 
 
-// Club profile 
+// Club create
+
 router.get("/crear", (req, res, next) => {
 
     res.render('clubs/club-create.hbs')
@@ -28,7 +29,7 @@ router.get("/crear", (req, res, next) => {
 })
 
 router.post('/crear', (req, res) => {
-    const { name, street, city, zip, image, longitude, latitude } = req.body
+    const { name, street, city, zip, image, longitude, latitude, numberOfFields, web, phone, weekdaysFrom, weekdaysTo, weekendsFrom, weekendsTo, holidaysFrom, holidaysTo } = req.body
 
     const location = {
         type: "Point",
@@ -39,17 +40,30 @@ router.post('/crear', (req, res) => {
         city: city,
         zip: zip
     }
+    const schedule = {
+        weekdays: {
+            from: weekdaysFrom,
+            to: weekdaysTo,
+        },
+
+        weekends: {
+            from: weekendsFrom,
+            to: weekendsTo,
+        },
+
+        holidays: {
+            from: holidaysFrom,
+            to: holidaysTo,
+        }
+    }
 
     Club
-        .create({ name, address, image, location })
+        .create({ name, address, image, location, schedule, numberOfFields, web, phone, })
         .then(() => {
             res.redirect(`/clubs`)
         })
         .catch(err => console.log(err))
 })
-
-// Club create
-
 
 
 // Club profile 
@@ -58,18 +72,34 @@ router.get('/:id', (req, res, next) => {
 
     const { id } = req.params
     const user = req.session.currentUser
-    
-    Club
-    .findById(id)
-    .then(club => {
-        Match
-        .find({ 'club': { $eq: id } })
-        .then(match => {
-            res.render('clubs/club-details', { club, match })
+
+    const promises = [
+        Club.findById(id),
+        Match.find({ 'club': { $eq: id } }),
+        User.find({ 'favouriteClubs': { $eq: id } })
+    ]
+
+    Promise
+        .all(promises)
+        .then(([clubInfo, matchInfo, followers]) => res.render('clubs/club-details', { clubInfo, matchInfo, followers }))
+        .catch(err => console.log(err))
+})
+
+
+// Favourite club 
+
+router.post('/:id/favourite', (req, res, next) => {
+
+    const { id } = req.params
+    const { _id } = req.session.currentUser
+
+    User
+        .findByIdAndUpdate(_id, { $addToSet: { favouriteClubs: id } })
+        .then(() => {
+            res.redirect(`/clubs/${id}`)
         })
         .catch(err => console.log(err))
     })
-})
 
 // Edit club
 
@@ -88,10 +118,10 @@ router.get('/:id/editar', (req, res, next) => {
 router.post('/:id/editar', (req, res) => {
 
     const { id } = req.params
-    const { name, street, city, zip, longitude, latitude, image } = req.body
+    const { name, street, city, zip, longitude, latitude, image, numberOfFields, web, phone, weekdaysFrom, weekdaysTo, weekendsFrom, weekendsTo, holidaysFrom, holidaysTo } = req.body
 
     Club
-        .findByIdAndUpdate(id, { name, street, city, zip, longitude, latitude, image }, { new: true })
+        .findByIdAndUpdate(id, { name, street, city, zip, longitude, latitude, image, numberOfFields, web, phone, weekdaysFrom, weekdaysTo, weekendsFrom, weekendsTo, holidaysFrom, holidaysTo }, { new: true })
         .then(club => {
             res.redirect('/clubs')
         })
@@ -132,3 +162,5 @@ router.post('/:id/eliminar', (req, res) => {
 
 
 module.exports = router
+
+
