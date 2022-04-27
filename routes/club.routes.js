@@ -94,7 +94,8 @@ router.post('/:id/favourite', (req, res, next) => {
             res.redirect(`/clubs/${id}`)
         })
         .catch(err => console.log(err))
-    })
+})
+
 
 
 router.get('/:id/editar', (req, res, next) => {

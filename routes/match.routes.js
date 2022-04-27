@@ -113,4 +113,40 @@ router.post('/:matchID/edit/eliminar-jugador/:playerID', (req, res) => {
 })
 
 
+// Results form
+
+router.get('/:id/resultado', (req, res, next) => {
+    res.render('matches/result-form')
+});
+
+router.post('/:id/resultado', (req, res, next) => {
+    const { id } = req.params
+    const { set1team1, set1team2, set2team1, set2team2, set3team1, set3team2 } = req.body
+
+    const result = {
+        set1: {
+            team1: set1team1,
+            team2: set1team2,
+        },
+        set2: {
+            team1: set2team1,
+            team2: set2team2,
+        },
+        set3: {
+            team1: set3team1,
+            team2: set3team2,
+        },
+    }
+
+    Match
+        .create(id, { set1team1, set1team2, set2team1, set2team2, set3team1, set3team2 })
+        .then(result => {
+            res.redirect('/partidos/:id')
+        })
+        .catch(err => console.log(err))
+});
+
 module.exports = router
+
+
+
