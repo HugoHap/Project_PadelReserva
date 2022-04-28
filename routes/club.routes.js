@@ -4,8 +4,6 @@ const Club = require("./../models/Club.model")
 const User = require("./../models/User.model")
 const Match = require("./../models/Match.model")
 
-const {userIsAdmin} = require("./../utils/index")
-
 const { isLoggedIn } = require('../middleware/route-guard.js')
 
 const fileUploader = require("../config/cloudinary.config")
@@ -75,7 +73,6 @@ router.get('/:clubId', (req, res, next) => {
     const { _id } = req.session.currentUser
     const isAdmin = req.session.currentUser.role === 'ADMIN'
 
-    // comprobar si seguimos a este club 
     const promises = [
         Club.findById(clubId),
         Match.find({ 'club': { $eq: clubId } }),

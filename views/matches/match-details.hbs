@@ -19,9 +19,17 @@
             {{/each}}
         </div>
     </div>
-    <form action="/partidos/{{detMatch.id}}/unirse" method="POST">
-        <button class="btn btn-dark" type="submit">Unirse</button>
+
+    {{#if isPlayer}}
+    <form action="/partidos/{{detMatch.id}}/desunirse" method="POST">
+        <button class="btn btn-outline-info" type="submit">Desunirse</button>
     </form>
+
+    {{else}}
+    <form action="/partidos/{{detMatch.id}}/unirse" method="POST">
+        <button class="btn btn-outline-info" type="submit">Unirse</button>
+    </form>
+    {{/if}}
 
     {{#each comments}}
     <p>{{user.name}}</p>
@@ -60,17 +68,24 @@
             <li class="list-group-item">{{result.set3.team1}} - {{result.set3.team2}}</li>
         </ul>
         {{/if}}
-        <a href="/partidos/{{detMatch.id}}/resultado" class="btn btn-danger">Introducir resultado</a>
+
+        {{#if isCreator}}
+        <a href="/partidos/{{detMatch.id}}/resultado" class="btn btn-secondary">Introducir resultado</a>
+        {{/if}}
     </div>
 
 
     <hr>
 
+    {{#if isAdmin}}
     <form action="/partidos/{{detMatch.id}}/delete" method="POST">
-        <button class="btn btn-sm btn-warning" type="submit">Eliminar</button>
+        <button class="btn btn-sm btn-danger" type="submit">Eliminar</button>
     </form>
+    {{/if}}
 
-    <a href="/partidos/{{detMatch.id}}/edit" class="btn btn-dark">Editar partido</a>
+    {{#if isCreator}}
+    <a href="/partidos/{{detMatch.id}}/edit" class="btn btn-warning">Editar partido</a>
+    {{/if}}
 
     <a href="/partidos" class="btn btn-dark">Volver a la lista</a>
 

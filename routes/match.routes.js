@@ -70,12 +70,19 @@ router.get('/:id', (req, res, next) => {
         .all(promises)
         .then(([detMatch, comments]) => {
 
-            
-            console.log("DETMATCH -------", detMatch.club.location.coordinates);
+            const isCreator = detMatch.players[0].id === req.session.currentUser._id
+            let isPlayer = false
+
+            detMatch.players.forEach(player => {
+                if (player._id == req.session.currentUser._id) {
+                    isPlayer = true
+                }
+            })
+
             let date = formatDate(detMatch.date)
             let day = formatDay(detMatch.date)
 
-            res.render('matches/match-details', { detMatch, comments, date, day })
+            res.render('matches/match-details', { detMatch, comments, date, day, isCreator, isPlayer })
         })
         .catch(err => console.log(err))
 })
@@ -90,6 +97,17 @@ router.post('/:id/unirse', (req, res) => {
 
     Match
         .findByIdAndUpdate(id, { $addToSet: { players: _id } })
+        .then(() => res.redirect('/partidos'))
+        .catch(err => console.log(err))
+})
+
+router.post('/:id/desunirse', (req, res) => {
+
+    const { id } = req.params
+    const { _id } = req.session.currentUser
+
+    Match
+        .findByIdAndUpdate(id, { $pull: { players: _id } })
         .then(() => res.redirect("/partidos"))
         .catch(err => console.log(err))
 })
@@ -100,11 +118,12 @@ router.post('/:id/unirse', (req, res) => {
 router.post('/:id/delete', (req, res) => {
 
     const { id } = req.params
+    const isAdmin = req.session.currentUser.role === 'ADMIN'
 
     Match
         .findByIdAndDelete(id)
         .then(() => {
-            res.redirect('/partidos')
+            res.redirect('/partidos', isAdmin)
         })
         .catch(err => console.log(err))
 })
@@ -161,10 +180,7 @@ router.get('/:id/resultado', (req, res, next) => {
     Match
         .findById(id)
         .then(match => {
-
-            const isCreator = match.players[0] === req.session.currenUser
-
-            res.render('matches/result-form', match, isCreator)
+            res.render('matches/result-form', match)
         })
         .catch(err => console.log(err))
 });
