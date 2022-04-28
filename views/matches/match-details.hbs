@@ -5,8 +5,10 @@
     <div class="row">
         <div class="col-md-8">
             <h3>Detalles</h3>
-            <p>Fecha:{{detMatch.date}}</p>
+            <p>Hora:{{date}}</p>
+            <p>Dia: {{day}}</p>
             <p>Lugar:{{detMatch.club.name}}</p>
+
         </div>
         <div class="col-md-4">
             <h3>Jugadores</h3>
@@ -15,7 +17,7 @@
             {{/each}}
         </div>
     </div>
-    <form action="/partidos/{{id}}/unirse" method="POST">
+    <form action="/partidos/{{detMatch.id}}/unirse" method="POST">
         <button class="btn btn-dark" type="submit">Unirse</button>
     </form>
 

@@ -1,5 +1,7 @@
 const router = require("express").Router()
 
+const { formatDate, formatDay }  = require("../utils/formatDate")
+
 const Club = require("../models/Club.model")
 const Match = require("./../models/Match.model")
 const Comment = require("./../models/Comment.model")
@@ -12,14 +14,22 @@ router.get('/', isLoggedIn, (req, res) => {
 
     Match
         .find()
-        .populate("club", "players")
+        .populate("club players")
+        // .populate("players")
         .then(matches => {
-            console.log(matches)
-            res.render('matches/match-list', { matches })
+
+            console.log(matches[0].players.length)
+
+            matches.forEach(match  => {
+                date = formatDate(match.date)
+                day = formatDay(match.date)
+                numPlay = match.players.length
+            });
+
+            res.render('matches/match-list', { matches, date, day, numPlay})
         })
         .catch(err => console.log(err))
 })
-
 
 // Create match 
 
@@ -59,7 +69,13 @@ router.get('/:id', (req, res, next) => {
 
     Promise
         .all(promises)
-        .then(([detMatch, comments]) => res.render('matches/match-details', { detMatch, comments }))
+        .then(([detMatch, comments]) => { 
+
+            console.log(detMatch.date);
+            let date = formatDate(detMatch.date)
+            let day = formatDay(detMatch.date)
+
+            res.render('matches/match-details', { detMatch, comments, date, day })})
         .catch(err => console.log(err))
 })
 
