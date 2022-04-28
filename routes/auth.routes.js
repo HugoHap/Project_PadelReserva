@@ -24,18 +24,9 @@ router.post('/registro', fileUploader.single('avatarFile'), (req, res, next) => 
 })
 
 
-
-
-
-
-
-
-
-
 router.get('/iniciar-sesion', (req, res, next) => {
     res.render('auth/login')
 })
-
 
 
 router.post('/iniciar-sesion', (req, res, next) => {
@@ -64,13 +55,6 @@ router.post('/iniciar-sesion', (req, res, next) => {
         })
         .catch(error => next(error))
 })
-
-
-
-
-
-
-
 
 
 router.post('/cerrar-sesion', (req, res, next) => {

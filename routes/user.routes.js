@@ -16,13 +16,14 @@ router.get('/', isLoggedIn, (req, res, next) => {
 
     const promises = [
         User.findById(_id).populate("favouriteClubs"),
-        Match.find({ 'players': { $eq: _id } }).populate("club"),
+        Match.find({ 'players': { $eq: _id } }).populate("club").populate("players"),
     ]
 
     Promise
         .all(promises)
         .then(([userDet, matchDet]) => {
 
+            console.log("asdadadad----------", userDet);
             res.render('user/profile-page', { userDet, matchDet })
         })
         .catch(err => console.log(err))

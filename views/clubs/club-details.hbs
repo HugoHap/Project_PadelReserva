@@ -1,5 +1,6 @@
 <div class="container">
 
+
     <div class="row">
         <div class="col-md-6">
             <img src="{{clubInfo.image}}" class="figure-img img-fluid rounded" alt="Foto del club">
@@ -57,7 +58,7 @@
 
 <div class="container">
     <div class="row align-items-center">
-        <figure id="clubsMap"></figure>
+        <figure id="detailsMap"></figure>
     </div>
 </div>
 
@@ -91,8 +92,10 @@
     </div>
 </div>
 
+    <p hidden id="latitudeClub">{{clubInfo.location.coordinates.[1]}}</p>
+    <p hidden id="longitudeClub">{{clubInfo.location.coordinates.[0]}}</p>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="/js/club-map.js"></script>
+<script src="/js/details-maps-club.js"></script>
 <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtf8mk6VyrR7KMMLz5WRmqhcbrtuTYDCg&callback=initMap"></script>

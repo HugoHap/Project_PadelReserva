@@ -2,23 +2,43 @@
     <div class="row align-items-start">
         <div class="col">
             <img src="{{userDet.avatar}}" class="img-fluid" alt="profile picture">
+
+            <h3>Clubes Favoritos: </h3>
+            {{#each userDet.favouriteClubs}}
+            <p>{{name}}</p>
+            <img src="{{image}}" class="imgclubprof" alt="Imagen Club">
+            {{/each}}
+
         </div>
         <div class="col-7">
             <h1>Mi perfil</h1>
             <hr>
             <h2>{{userDet.name}}</h2>
-            <p>Partidos</p>
-            {{#each matchDet}}
-            <p>{{../dateFormat}}</p>
-            <p>{{../dayFormat}}</p>
-                {{#each club}}
-                <p>{{name}}</p>
+            <hr>
+            <h3>Partidos disponibles: </h3>
+
+            <div class="row match-list">
+                {{#each matchDet}}
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="col">
+                                <h5 class="card-title">{{../day}} {{../date}}</h5>
+                                <h5 class="card-text">{{club.name}}</h5>
+                            </div>
+                            <div class="col avatarimg">
+                                <p> Numero Jugadores:</p>
+                                {{#each players}}
+                                <img src="{{avatar}}" class="imgavatar" alt="imagen perfil">
+                                {{/each}}
+                            </div>
+                            <p class="card-text"> <strong>Genero: </strong>{{genre}}</p>
+                            <p class="card-text"> <strong>Precio: </strong>{{price}}€</p>
+                        </div>
+                    </div>
+                </div>
                 {{/each}}
-            {{/each}}
-            {{#each userDet.favouriteClubs}}
-            <p>{{name}}</p>
-            <img src="{{image}}" class="imgclubprof" alt="Imagen Club">
-            {{/each}}
+            </div>
 
             <a href="/perfil/{{userDet._id}}/editar" class="btn btn-dark">Editar perfil</a>
             <a href="/" class="btn btn-dark">Volver a inicio</a>

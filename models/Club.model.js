@@ -4,7 +4,7 @@ const clubSchema = new Schema(
     {
         name: {
             type: String,
-            required: true
+            required: [true, "Indica el nombre del centro"],
         },
         address: {
             street: {

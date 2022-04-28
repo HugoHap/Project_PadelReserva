@@ -42,7 +42,8 @@ const matchSchema = new Schema(
         },
         players: [{
             type: Schema.Types.ObjectId,
-            ref: 'User'
+            ref: 'User',
+            max: 4
         }],
         club: {
             type: Schema.Types.ObjectId,
