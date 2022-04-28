@@ -25,9 +25,10 @@ router.get('/', isLoggedIn, (req, res, next) => {
 // Create club 
 
 router.get("/crear", (req, res, next) => {
-    const isAdmin = req.session.currentUser.role === 'ADMIN'
+    // app.locals.user = projectName
 
-    res.render('clubs/club-create', isAdmin)
+    // const isAdmin = req.session.currentUser.role === 'ADMIN'
+    res.render('clubs/club-create')
 })
 
 router.post('/crear', fileUploader.single('imageFile'), (req, res) => {

@@ -24,9 +24,19 @@ router.post('/registro', fileUploader.single('avatarFile'), (req, res, next) => 
 })
 
 
+
+
+
+
+
+
+
+
 router.get('/iniciar-sesion', (req, res, next) => {
     res.render('auth/login')
 })
+
+
 
 router.post('/iniciar-sesion', (req, res, next) => {
 
@@ -42,9 +52,13 @@ router.post('/iniciar-sesion', (req, res, next) => {
                 res.render('auth/login', { errorMessage: 'La contraseña es incorrecta' })
                 return
             } else {
-
                 req.session.currentUser = user
 
+                if (req.session.currentUser.role === 'ADMIN') {
+                    req.app.locals.isAdmin = true
+                } else {
+                    req.app.locals.isAdmin = false
+                }
                 res.redirect('/perfil')
             }
         })
@@ -52,8 +66,16 @@ router.post('/iniciar-sesion', (req, res, next) => {
 })
 
 
+
+
+
+
+
+
+
 router.post('/cerrar-sesion', (req, res, next) => {
     req.session.destroy(() => res.redirect('/'))
 })
+
 
 module.exports = router
