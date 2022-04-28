@@ -22,8 +22,8 @@ router.get('/', isLoggedIn, (req, res, next) => {
     Promise
         .all(promises)
         .then(([userDet, matchDet]) => {
-            
-            res.render('user/profile-page', { userDet, matchDet})
+
+            res.render('user/profile-page', { userDet, matchDet })
         })
         .catch(err => console.log(err))
 })
