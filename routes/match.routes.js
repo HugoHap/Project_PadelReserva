@@ -122,22 +122,10 @@ router.get('/:id/edit', (req, res) => {
     Promise
         .all(promisesEdit)
         .then(([editMatch, clubs]) => {
-
-            console.log("Info CLUBS--------",clubs);
             res.render('matches/match-edit', { editMatch, clubs })
         })
         .catch(err => console.log(err))
 
-
-    // Match
-    //     .findById(id)
-    //     .populate("players")
-    //     .populate("club")
-    //     .then(editMatch => {
-    //         console.log(editMatch);
-    //         res.render('matches/match-edit', {editMatch })
-    //     })
-    //     .catch(err => console.log(err))
 })
 
 
@@ -172,7 +160,12 @@ router.get('/:id/resultado', (req, res, next) => {
 
     Match
         .findById(id)
-        .then(match => res.render('matches/result-form', match))
+        .then(match => {
+
+            const isCreator = match.players[0] === req.session.currenUser
+
+            res.render('matches/result-form', match, isCreator)
+        })
         .catch(err => console.log(err))
 });
 
