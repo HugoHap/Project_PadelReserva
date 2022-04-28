@@ -37,12 +37,21 @@
     padding-right: 20px;
     border-radius: 30px;
     border: solid 1px transparent;
+}
 
+.btn.btn-outline-dark {
+    border-radius: 30px;
+    border: solid 1px black;
 }
 
 .navbar-parent {
     display: flex !important;
     justify-content: space-between;
+}
+
+.card {
+    margin-top: 20px;
+    margin-bottom: 5px;
 }
 
 .nav-link {
@@ -74,9 +83,29 @@
     border-radius: 100%;
     border: solid 1px white;
     width: 100px;
+    height: 75px;
+    object-fit: cover;
+}
+
+.phone {
+    padding-left: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.web {
+    padding-left: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.imgavatar {
+    border-radius: 100%;
+    border: solid 1px white;
+    width: 80px;
     height: 80px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    object-fit: cover;
+    align-content: center;
 }
 
 .container {
@@ -104,15 +133,6 @@
     padding-right: 40px;
 }
 
-/* .home {
-    position: relative;
-    display: inline-block;
-    text-align: center;
-    background-color: green;
-    background-image: url(fondopadel.webp);
-    background-repeat: no-repeat;
-} */
-
 .backgroundimg {
     width: 1450px;
     object-fit: cover;
@@ -133,9 +153,38 @@
     height: 100px;
 }
 
-.imgavatar {
+.clubcreate-map {
+    margin-top: 30px;
+}
+
+.btn-secondary.like {
+    margin-top: 20px;
+}
+
+.btn-danger.like {
+    margin-top: 20px;
+}
+
+.btn-warning.like {
+    margin-top: 22px;
+}
+
+.matchplayers {
     border-radius: 100%;
     border: solid 1px white;
-    width: 100px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    align-content: center;
+}
+
+.card.comments {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.clubmatch {
+    object-fit: cover;
+    width: 200px;
+    border-radius: 10px;
 }

@@ -11,9 +11,9 @@
             {{#each matchDet}}
             <p>{{../dateFormat}}</p>
             <p>{{../dayFormat}}</p>
-                {{#each club}}
-                <p>{{name}}</p>
-                {{/each}}
+            {{#each club}}
+            <p>{{name}}</p>
+            {{/each}}
             {{/each}}
             {{#each userDet.favouriteClubs}}
             <p>{{name}}</p>
@@ -21,7 +21,7 @@
             {{/each}}
 
             <a href="/perfil/{{userDet._id}}/editar" class="btn btn-dark">Editar perfil</a>
-            <a href="/" class="btn btn-dark">Volver a inicio</a>
+            <a href="/partidos/crear" class="btn btn-dark">Crear partido</a>
         </div>
     </div>
 </div>

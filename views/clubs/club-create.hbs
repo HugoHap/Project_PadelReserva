@@ -79,22 +79,25 @@
                         <input type="time" class="form-control" id="holidaysTo" name="holidaysTo">
                     </div>
 
-                    <button type="submit" class="btn btn-dark">Crear club</button>
-                    <a href="/" class="btn btn-dark">Volver al inicio</a>
+                    <div class="clubcreate-map">
+                        <p>Localización</p>
+                        <style class="clubcreate-map">
+                            #matchMap {
+                                height: 300px;
+                                background-color: red;
+                                margin-top: 10px;
+                            }
+                        </style>
+
+                        <figure id="matchMap"></figure>
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-dark">Crear club</button>
+                        <a href="/" class="btn btn-dark">Volver al inicio</a>
+                    </div>
+
             </form>
-
-            <style>
-                #matchMap {
-                    height: 300px;
-                    background-color: red;
-                    margin-top: 10px;
-                }
-            </style>
-
-            <figure id="matchMap"></figure>
-
-            <hr>
-
 
         </div>
     </div>
