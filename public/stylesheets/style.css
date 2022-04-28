@@ -4,16 +4,17 @@
     left: 0;
     bottom: 0;
     right: 0;
-    overflow: auto;
-    background-color: aqua;
-    background-image: url("https: //images.app.goo.gl/jZTQj2AEsnWQMVKbA");
+    /* overflow: auto; */
+    /* background-color: aqua; */
+    /* background-image: url("https://mdn.mozillademos.org/files/6457/mdn_logo_only_color.png"); */
+    background-image: url("https://fotografias.antena3.com/clipping/cmsimages02/2021/10/25/EB3767FF-1E84-4602-8E6A-D4957D86A34E/98.jpg?crop=1920,1080,x0,y200&width=1900&height=1069&optimize=low&format=webply");
     background-repeat: no-repeat;
-    background-position: right top;
+    background-position: right bottom;
 }
 
 .index-elements {
     text-align: center;
-    margin-top: 300px;
+    margin-top: 230px;
 }
 
 .match-list {
@@ -39,10 +40,18 @@
 
 }
 
-.cerrar-sesion {
-    margin-left: 1000px;
+.navbar-parent {
+    display: flex !important;
+    justify-content: space-between;
 }
 
+.nav-link {
+    width: 100px;
+}
+
+.row.align-items-center {
+    margin-bottom: 50px;
+}
 
 
 .rounded {
@@ -59,11 +68,6 @@
 
 .clubs {
     margin: 100px;
-}
-
-.followersPic {
-    border-radius: 5px;
-    border: 1px, black;
 }
 
 .followersPic {
@@ -84,14 +88,14 @@
     margin-right: 50px;
 }
 
-.home {
+/* .home {
     position: relative;
     display: inline-block;
     text-align: center;
     background-color: green;
     background-image: url(fondopadel.webp);
     background-repeat: no-repeat;
-}
+} */
 
 .backgroundimg {
     width: 1450px;

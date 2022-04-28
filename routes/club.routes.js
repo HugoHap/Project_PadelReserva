@@ -8,6 +8,9 @@ const { isLoggedIn } = require('../middleware/route-guard.js')
 
 const fileUploader = require("../config/cloudinary.config")
 
+
+// Clubs list 
+
 router.get('/', isLoggedIn, (req, res, next) => {
 
     Club
@@ -19,10 +22,12 @@ router.get('/', isLoggedIn, (req, res, next) => {
 })
 
 
+// Create club 
+
 router.get("/crear", (req, res, next) => {
+    const isAdmin = req.session.currentUser.role === 'ADMIN'
 
-    res.render('clubs/club-create.hbs')
-
+    res.render('clubs/club-create', isAdmin)
 })
 
 router.post('/crear', fileUploader.single('imageFile'), (req, res) => {
@@ -62,38 +67,41 @@ router.post('/crear', fileUploader.single('imageFile'), (req, res) => {
 })
 
 
-router.get('/:id', (req, res, next) => {
+// Club details 
 
-    const { id } = req.params
-    const user = req.session.currentUser
+router.get('/:clubId', (req, res, next) => {
 
+    const { clubId } = req.params
+    const { _id } = req.session.currentUser
+    const isAdmin = req.session.currentUser.role === 'ADMIN'
+
+    // comprobar si seguimos a este club 
     const promises = [
-        Club.findById(id),
-        Match.find({ 'club': { $eq: id } }),
-        User.find({ 'favouriteClubs': { $eq: id } })
+        Club.findById(clubId),
+        Match.find({ 'club': { $eq: clubId } }),
+        User.find({ 'favouriteClubs': { $eq: clubId } }).populate('favouriteClubs')
     ]
 
     Promise
         .all(promises)
-        .then(([clubInfo, matchInfo, followers]) => res.render('clubs/club-details', { clubInfo, matchInfo, followers }))
-        .catch(err => console.log(err))
-})
+        .then(([clubInfo, matchInfo, followers]) => {
 
+            let isFollowing = false
 
-router.post('/:id/favourite', (req, res, next) => {
-
-    const { id } = req.params
-    const { _id } = req.session.currentUser
-
-    User
-        .findByIdAndUpdate(_id, { $addToSet: { favouriteClubs: id } })
-        .then(() => {
-            res.redirect(`/clubs/${id}`)
+            followers.forEach(eachFollower => {
+                eachFollower.favouriteClubs.forEach(eachClub => {
+                    if (eachClub._id == clubId) {
+                        isFollowing = true
+                    }
+                })
+            })
+            res.render('clubs/club-details', { clubInfo, matchInfo, followers, isAdmin, isFollowing })
         })
         .catch(err => console.log(err))
 })
 
 
+// Edit club
 
 router.get('/:id/editar', (req, res, next) => {
 
@@ -138,6 +146,8 @@ router.post('/:id/editar', (req, res) => {
 })
 
 
+// Add to favouriteClubs
+
 router.post('/:id/favourite', (req, res, next) => {
 
     const { id } = req.params
@@ -151,6 +161,24 @@ router.post('/:id/favourite', (req, res, next) => {
         .catch(err => console.log(err))
 })
 
+
+// Eliminate from favourite
+
+router.post('/:id/eliminate-favourite', (req, res, next) => {
+
+    const { id } = req.params
+    const { _id } = req.session.currentUser
+
+    User
+        .findByIdAndUpdate(_id, { $pull: { favouriteClubs: id } })
+        .then(() => {
+            res.redirect(`/clubs/${id}`)
+        })
+        .catch(err => console.log(err))
+})
+
+
+// Delete club 
 
 router.post('/:id/eliminar', (req, res) => {
 

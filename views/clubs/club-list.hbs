@@ -4,13 +4,16 @@
 
     <hr>
 
-    <div class="clubs row align-items-center">
+    <div class="row align-items-center club-list">
         {{#each clubs}}
-        <div class="col">
-            <img src="{{image}}" class="figure-img img-fluid rounded" alt="Foto del club">
+        <div class="col-sm-4">
+            <a href="/clubs/{{id}}">
+                <img alt="club pic" src="{{image}}" class="figure-img img-fluid rounded">
+            </a>
+            {{!-- <img src="{{image}}" class="figure-img img-fluid rounded" alt="Foto del club"> --}}
             <h2>{{name}}</h2>
             <small class="text-muted">{{address.city}}</small>
-            <a href="/clubs/{{id}}" class="btn btn-info">Detalles</a>
+            {{!-- <a href="/clubs/{{id}}" class="btn btn-info">Detalles</a> --}}
         </div>
 
         {{/each}}

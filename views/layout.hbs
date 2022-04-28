@@ -21,19 +21,12 @@
             <span class="navbar-toggler-icon"></span>
          </button>
          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav me-auto">
 
-               {{!-- <li class="nav-item">
-                  <a class="nav-link" href="/registro">Registro</a>
-               </li> --}}
-               {{!-- <li class="nav-item">
-                  <a class="nav-link" href="/iniciar-sesion">Inicio de sesión</a>
-               </li> --}}
 
                <li class="nav-item">
                   <a class="nav-link" href="/perfil">Mi perfil</a>
                </li>
-
                <li class="nav-item">
                   <a class="nav-link" href="/partidos">Partidos</a>
                </li>
@@ -45,12 +38,17 @@
                   <a class="nav-link" href="/clubs/crear">Crear club</a>
                </li>
                {{/if}}
+            </ul>
+
+            <ul class="navbar-nav ms-auto">
                <li class="nav-item cerrar-sesion">
                   <form action="/cerrar-sesion" method="POST">
                      <button type="button" class="btn btn-ligth 2">Cerrar Sesion</button>
                   </form>
                </li>
             </ul>
+
+
          </div>
       </div>
    </nav>

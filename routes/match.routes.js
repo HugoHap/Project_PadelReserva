@@ -1,6 +1,6 @@
 const router = require("express").Router()
 
-const { formatDate, formatDay }  = require("../utils/formatDate")
+const { formatDate, formatDay } = require("../utils/formatDate")
 
 const Club = require("../models/Club.model")
 const Match = require("./../models/Match.model")
@@ -14,19 +14,18 @@ router.get('/', isLoggedIn, (req, res) => {
 
     Match
         .find()
-        .populate("club players")
-        // .populate("players")
+        .populate("club", "players")
         .then(matches => {
 
             console.log(matches[0].players.length)
 
-            matches.forEach(match  => {
+            matches.forEach(match => {
                 date = formatDate(match.date)
                 day = formatDay(match.date)
                 numPlay = match.players.length
             });
 
-            res.render('matches/match-list', { matches, date, day, numPlay})
+            res.render('matches/match-list', { matches, date, day, numPlay })
         })
         .catch(err => console.log(err))
 })
@@ -69,13 +68,14 @@ router.get('/:id', (req, res, next) => {
 
     Promise
         .all(promises)
-        .then(([detMatch, comments]) => { 
+        .then(([detMatch, comments]) => {
 
             console.log(detMatch.date);
             let date = formatDate(detMatch.date)
             let day = formatDay(detMatch.date)
 
-            res.render('matches/match-details', { detMatch, comments, date, day })})
+            res.render('matches/match-details', { detMatch, comments, date, day })
+        })
         .catch(err => console.log(err))
 })
 
