@@ -17,9 +17,7 @@ router.get('/', isLoggedIn, (req, res) => {
         .populate("club players")
         .then(matches => {
 
-
-
-            matches.forEach(match  => {
+            matches.forEach(match => {
                 date = formatDate(match.date)
                 day = formatDay(match.date)
                 numPlay = match.players.length

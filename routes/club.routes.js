@@ -27,8 +27,6 @@ router.get('/', isLoggedIn, (req, res, next) => {
 // Create club 
 
 router.get("/crear", (req, res, next) => {
-    const isAdmin = req.session.currentUser.role === 'ADMIN'
-
     res.render('clubs/club-create')
 })
 
