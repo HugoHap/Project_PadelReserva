@@ -1,4 +1,5 @@
 <div class="container">
+    <h1>Detalles del partido</h1>
 
     <hr>
 
@@ -6,18 +7,27 @@
     <p hidden id="longitudeMatch">{{detMatch.club.location.coordinates.[1]}}</p>
     <div class="row">
         <div class="col-md-8">
-            <h3>Detalles</h3>
-            <p>Hora:{{date}}</p>
-            <p>Dia: {{day}}</p>
-            <p>Lugar:{{detMatch.club.name}}</p>
+            <div>
+                <h5>Hora:</h5>{{date}}
+            </div>
+            <div>
+                <h5>Dia:</h5>{{day}}
+            </div>
 
+            <h5>Club:</h5>{{detMatch.club.name}}
+            <img class="clubmatch" src="{{detMatch.club.image}}" alt="club pic">
         </div>
-        <div class="col-md-4">
-            <h3>Jugadores</h3>
+    </div>
+    <div class="container">
+        <h4>Jugadores</h4>
+        <div class="row">
             {{#each detMatch.players}}
-            <p>{{name}}</p>
+            <div class="col-md-1">
+                <img class="matchplayers" src="{{avatar}}">
+            </div>
             {{/each}}
         </div>
+
     </div>
 
     {{#if isPlayer}}
@@ -31,32 +41,8 @@
     </form>
     {{/if}}
 
-    {{#each comments}}
-    <p>{{user.name}}</p>
-    <p>{{content}}</p>
-    {{/each}}
 
-    <hr>
 
-    <div class="container">
-        <div class="row reviews-form">
-            <form action="/comentario/{{detMatch.id}}/crear" method="POST">
-                <div class="row">
-                    <div class="col-md-4">
-                        <label for="exampleFormControlTextarea1" class="form-label">
-                            <h6>Chat de partido</h6>
-                        </label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="content"
-                            type="text"></textarea>
-                    </div>
-                    
-
-                    <div class="col-sm-2 mt-5">
-                        <button type="submit" class="btn btn-outline-dark" style="width: 7rem;">Enviar</button>
-                    </div>
-            </form>
-        </div>
-    </div>
     {{#if result.set1.team1}}
     <div class="card" style="width: 18rem;">
         <div class="card-header">
@@ -87,7 +73,7 @@
     <a href="/partidos/{{detMatch.id}}/edit" class="btn btn-warning">Editar partido</a>
     {{/if}}
 
-    <a href="/partidos" class="btn btn-dark">Volver a la lista</a>
+    <a href="/partidos" class="btn btn-dark">Volver a la lista de partidos</a>
 
 </div>
 
@@ -96,6 +82,43 @@
         <figure id="matchMap"></figure>
     </div>
 </div>
+
+<div class="container">
+    <div class="row reviews-form">
+        <form action="/comentario/{{detMatch.id}}/crear" method="POST">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="exampleFormControlTextarea1" class="form-label">
+                        <h5>Chat de partido</h5>
+                    </label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="content"
+                        type="text"></textarea>
+                </div>
+
+
+                <div class="col-sm-2 mt-5">
+                    <button type="submit" class="btn btn-outline-dark" style="width: 7rem;">Enviar</button>
+                </div>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+    <h5>Comentarios</h5>
+    <div class="row">
+        {{#each comments}}
+        <div class="card comments" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{user.name}}</h5>
+                <p class="card-text">{{content}}</p>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/js/details-maps.js"></script>

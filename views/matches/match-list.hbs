@@ -4,33 +4,30 @@
 
     <hr>
 
+    <a href="/partidos/crear" class="btn btn-dark">Crear nuevo partido</a>
+
     <div class="row match-list">
         {{#each matches}}
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">{{../day}}</h5>
-                    <h5 class="card-title">{{../date}}</h5>
-                    <h5 class="card-text">{{club.name}}</h5>
-                    <p> <strong>Numero Jugadores: </strong></p>
-                    {{#each players}}
-                    <img src="{{avatar}}" class="imgavatar" alt="imagen perfil">
-                    {{/each}}
+                    <div class="col">
+                        <h5 class="card-title">{{../day}} {{../date}}</h5>
+                        <h5 class="card-text">{{club.name}}</h5>
+                    </div>
+                    <div class="col avatarimg">
+                        <p> Numero Jugadores:</p>
+                        {{#each players}}
+                        <img src="{{avatar}}" class="imgavatar" alt="imagen perfil">
+                        {{/each}}
+                    </div>
                     <p class="card-text"> <strong>Genero: </strong>{{genre}}</p>
-                    <p><strong>Precio: </strong>{{price}}€</p>
-                    <a href="/partidos/{{_id}}" class="btn btn-primary">Ir al partido</a>
+                    <p class="card-text"> <strong> Precio: </strong>{{price}}€</p>
+                    <a href=" /partidos/{{_id}}" class="btn btn-outline-dark">Ir al partido</a>
+
                 </div>
             </div>
         </div>
         {{/each}}
     </div>
-
-
-
-    <hr>
-
-    <a href="/" class="btn btn-dark">Volver al inicio</a>
-
-    <a href="/partidos/crear" class="btn btn-dark">Crear un partido</a>
-
 </div>
