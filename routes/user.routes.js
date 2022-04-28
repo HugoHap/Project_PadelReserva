@@ -33,7 +33,6 @@ router.get('/', isLoggedIn, (req, res, next) => {
 router.get('/:id/editar', isLoggedIn, (req, res, next) => {
 
     const { id } = req.params
-    // const isMine = req.session.currentUser._id === id
 
     User
         .findById(id)

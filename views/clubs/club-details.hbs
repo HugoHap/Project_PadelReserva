@@ -9,14 +9,24 @@
             <h2>{{clubInfo.name}}</h2>
             <p>{{clubInfo.address.street}}, {{clubInfo.address.city}}, {{clubInfo.address.zip}}</p>
 
+            {{#if isFollowing}}
+            <form action="/clubs/{{clubInfo._id}}/eliminate-favourite" method="POST">
+                <button class="btn btn-secondary" type="submit">Dejar de seguir</button>
+            </form>
+
+            {{else}}
             <form action="/clubs/{{clubInfo._id}}/favourite" method="POST">
                 <button class="btn btn-danger" type="submit">Seguir</button>
             </form>
 
+            {{/if}}
+
             <p>Pistas disponibles {{clubInfo.numberOfFields}}</p>
             <a href="{{clubInfo.web}}" class="btn btn-dark">Web</a>
-            <a href="{{clubInfo.phone}}" class="btn btn-dark">Llamar</a>
-            <a href="/clubs/{{clubInfo._id}}/editar" class="btn btn-secondary">Editar perfil</a>
+            <p>Contacto: {{clubInfo.phone}}</p>
+            {{#if isAdmin}}
+            <a href="/clubs/{{clubInfo._id}}/editar" class="btn btn-warning">Editar perfil</a>
+            {{/if}}
         </div>
     </div>
 </div>
