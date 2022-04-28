@@ -14,8 +14,10 @@ router.get('/', isLoggedIn, (req, res) => {
 
     Match
         .find()
-        .populate("club", "players")
+        .populate("club players")
         .then(matches => {
+
+
 
             matches.forEach(match  => {
                 date = formatDate(match.date)
@@ -45,6 +47,8 @@ router.post('/crear', (req, res) => {
     const { date, club, price, genre, time } = req.body
     const { _id } = req.session.currentUser
 
+
+
     Match
         .create({ date, club, price, genre, time, players: _id })
         .then(() => {
@@ -68,7 +72,8 @@ router.get('/:id', (req, res, next) => {
         .all(promises)
         .then(([detMatch, comments]) => {
 
-            console.log(detMatch.date);
+            
+            console.log("DETMATCH -------", detMatch.club.location.coordinates);
             let date = formatDate(detMatch.date)
             let day = formatDay(detMatch.date)
 
@@ -118,7 +123,11 @@ router.get('/:id/edit', (req, res) => {
 
     Promise
         .all(promisesEdit)
-        .then(([editMatch, clubs]) => res.render('matches/match-edit', { editMatch, clubs }))
+        .then(([editMatch, clubs]) => {
+
+            console.log("Info CLUBS--------",clubs);
+            res.render('matches/match-edit', { editMatch, clubs })
+        })
         .catch(err => console.log(err))
 
 

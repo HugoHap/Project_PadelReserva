@@ -4,6 +4,8 @@ const Club = require("./../models/Club.model")
 const User = require("./../models/User.model")
 const Match = require("./../models/Match.model")
 
+const {userIsAdmin} = require("./../utils/index")
+
 const { isLoggedIn } = require('../middleware/route-guard.js')
 
 const fileUploader = require("../config/cloudinary.config")
@@ -27,7 +29,7 @@ router.get('/', isLoggedIn, (req, res, next) => {
 router.get("/crear", (req, res, next) => {
     const isAdmin = req.session.currentUser.role === 'ADMIN'
 
-    res.render('clubs/club-create', isAdmin)
+    res.render('clubs/club-create')
 })
 
 router.post('/crear', fileUploader.single('imageFile'), (req, res) => {

@@ -103,6 +103,11 @@
     margin-left: 0px;
 }
 
+#matchMap {
+        height: 300px;
+    background-color: red;
+}
+
 #clubsMap {
     height: 300px;
     background-color: red;
