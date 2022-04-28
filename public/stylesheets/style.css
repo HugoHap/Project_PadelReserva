@@ -1,3 +1,50 @@
+.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+    background-color: aqua;
+    background-image: url("https: //images.app.goo.gl/jZTQj2AEsnWQMVKbA");
+    background-repeat: no-repeat;
+    background-position: right top;
+}
+
+.index-elements {
+    text-align: center;
+    margin-top: 300px;
+}
+
+.match-list {
+    margin-bottom: 20px;
+}
+
+.match-list-btn {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.btn.btn-dark {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 30px;
+    border: solid 1px transparent;
+
+}
+
+.cerrar-sesion {
+    margin-left: 1000px;
+}
+
+
+
 .rounded {
     width: 700px;
 }
