@@ -1,9 +1,12 @@
 const router = require("express").Router()
 const User = require("../models/User.model")
+const Match = require("../models/Match.model")
+
 const { isLoggedIn } = require('../middleware/route-guard')
 const { isLoggedOut } = require('../middleware/route-guard')
+const { formatDate, formatDay } = require("../utils/formatDate")
 
-
+const fileUploader = require("../config/cloudinary.config")
 
 // User profile 
 
@@ -11,10 +14,16 @@ router.get('/', isLoggedIn, (req, res, next) => {
 
     const { _id } = req.session.currentUser
 
-    User
-        .findById(_id)
-        .then(player => {
-            res.render('user/profile-page', player)
+    const promises = [
+        User.findById(_id).populate("favouriteClubs"),
+        Match.find({ 'players': { $eq: _id } }).populate("club"),
+    ]
+
+    Promise
+        .all(promises)
+        .then(([userDet, matchDet]) => {
+            
+            res.render('user/profile-page', { userDet, matchDet})
         })
         .catch(err => console.log(err))
 })
@@ -24,25 +33,27 @@ router.get('/', isLoggedIn, (req, res, next) => {
 router.get('/:id/editar', isLoggedIn, (req, res, next) => {
 
     const { id } = req.params
-    const isMine = req.session.currentUser._id === id
+    // const isMine = req.session.currentUser._id === id
 
     User
         .findById(id)
         .then(player => {
-            res.render('user/edit-form', player, isMine)
+            res.render('user/edit-form', player)
         })
         .catch(err => console.log(err))
 })
 
 
-router.post('/:id/editar', (req, res, next) => {
+router.post('/:id/editar', fileUploader.single('avatarFile'), (req, res, next) => {
 
     const { id } = req.params
-    const { name, avatar, email } = req.body
+    const { name, email } = req.body
+    const { path } = req.file
+
 
     User
-        .findByIdAndUpdate(id, { name, avatar, email }, { new: true })
-        .then(player => {
+        .findByIdAndUpdate(id, { name, avatar: path, email }, { new: true })
+        .then(() => {
             res.redirect('/perfil')
         })
         .catch(err => console.log(err))

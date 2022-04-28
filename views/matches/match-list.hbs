@@ -9,15 +9,15 @@
         <div class="col-sm-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">{{../day}}</h5>
+                    <h5 class="card-title">{{../day}}</h5>  
                     <h5 class="card-title">{{../date}}</h5>
-                    <p class="card-text">{{club.name}}</p>
-                    <p>Numero Jugadores:{{../numPlay}}/4</p>
+                    <h5 class="card-text">{{club.name}}</h5>
+                    <p> <strong>Numero Jugadores: </strong>{{../numPlay}}/4</p>
                     {{#each players}}
-                    <p>{{name}}</p>
+                    <img src="{{avatar}}" class="imgavatar" alt="imagen perfil">
                     {{/each}}
-                    {{!-- <p class="card-text">{{players}}</p> --}}
-                    <p class="card-text">{{genre}}</p>
+                    <p class="card-text"> <strong>Genero: </strong>{{genre}}</p>
+                    <p><strong>Precio: </strong>{{price}}€</p>
                     <a href="/partidos/{{_id}}" class="btn btn-primary">Ir al partido</a>
                 </div>
             </div>

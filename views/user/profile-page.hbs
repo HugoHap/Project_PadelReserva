@@ -1,19 +1,26 @@
 <div class="container profile">
     <div class="row align-items-start">
         <div class="col">
-            <img src="{{avatar}}" class="img-fluid" alt="profile picture">
+            <img src="{{userDet.avatar}}" class="img-fluid" alt="profile picture">
         </div>
-        <div class="col">
+        <div class="col-7">
             <h1>Mi perfil</h1>
             <hr>
-            <h2>{{name}}</h2>
-            <p>Seguidores</p>
+            <h2>{{userDet.name}}</h2>
             <p>Partidos</p>
-            {{#each friends}}
-            <img src="cinqueterre.jpg" class="rounded-circle" alt="Friends pics">
+            {{#each matchDet}}
+            <p>{{../dateFormat}}</p>
+            <p>{{../dayFormat}}</p>
+                {{#each club}}
+                <p>{{name}}</p>
+                {{/each}}
             {{/each}}
-            <p>{{favouriteClubs}}</p>
-            <a href="/perfil/{{_id}}/editar" class="btn btn-dark">Editar perfil</a>
+            {{#each userDet.favouriteClubs}}
+            <p>{{name}}</p>
+            <img src="{{image}}" class="imgclubprof" alt="Imagen Club">
+            {{/each}}
+
+            <a href="/perfil/{{userDet._id}}/editar" class="btn btn-dark">Editar perfil</a>
             <a href="/" class="btn btn-dark">Volver a inicio</a>
         </div>
     </div>

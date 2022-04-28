@@ -19,7 +19,7 @@ router.post('/registro', fileUploader.single('avatarFile'), (req, res, next) => 
         .genSalt(saltRounds)
         .then(salt => bcrypt.hash(password, salt))
         .then(hashedPassword => User.create({ ...req.body, avatar: path, password: hashedPassword }))
-        .then(() => res.redirect('/'))
+        .then(() => res.redirect('/perfil'))
         .catch(error => next(error))
 })
 
@@ -31,7 +31,6 @@ router.get('/iniciar-sesion', (req, res, next) => {
 router.post('/iniciar-sesion', (req, res, next) => {
 
     const { email, password } = req.body
-    console.log(req.body);
 
     User
         .findOne({ email })
@@ -46,7 +45,7 @@ router.post('/iniciar-sesion', (req, res, next) => {
 
                 req.session.currentUser = user
 
-                res.redirect('/')
+                res.redirect('/perfil')
             }
         })
         .catch(error => next(error))

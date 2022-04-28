@@ -6,7 +6,7 @@
 
         <hr>
 
-        <form action="/perfil/{{_id}}/editar" method="POST">
+        <form action="/perfil/{{_id}}/editar" method="POST" enctype="multipart/form-data">
 
             <div class="mb-3">
                 <label for="name" class="form-label">Nombre</label>
@@ -18,7 +18,7 @@
             </div>
             <div class="mb-3">
                 <label for="avatar" class="form-label">Foto de perfil</label>
-                <input class="form-control" type="avatar" id="avatar" value="{{avatar}}">
+                <input class="form-control" type="file" id="avatar" name="avatarFile" value="{{avatar}}">
             </div>
 
 

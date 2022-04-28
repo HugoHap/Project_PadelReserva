@@ -103,3 +103,12 @@
     height: 300px;
     background-color: red;
 }
+.imgclubprof {
+    height: 100px;
+}
+.imgavatar {
+    border-radius: 100%;
+    border: solid 1px white;
+    width: 100px;
+    height: 70px;
+}

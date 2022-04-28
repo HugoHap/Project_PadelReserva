@@ -18,8 +18,6 @@ router.get('/', isLoggedIn, (req, res) => {
         // .populate("players")
         .then(matches => {
 
-            console.log(matches[0].players.length)
-
             matches.forEach(match  => {
                 date = formatDate(match.date)
                 day = formatDay(match.date)
