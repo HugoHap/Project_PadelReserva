@@ -20,7 +20,9 @@
     <div class="row align-items-center">
         {{#each userDet.favouriteClubs}}
         <div class="col-sm-3 favClubs">
-            <img src="{{image}}" class="fav-clubs" alt="Imagen Club">
+            <a href="/clubs/{{id}}">
+                <img alt="club pic" src="{{image}}" class="figure-img img-fluid rounded">
+            </a>
             <h5 class="header">{{name}}</h5>
         </div>
         {{/each}}

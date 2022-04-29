@@ -120,6 +120,7 @@
 
 .rounded {
     width: 700px;
+    height: 200px;
 }
 
 .btn.btn-light {
@@ -277,4 +278,12 @@
 
 .comments-container {
     margin-bottom: 100px;
+}
+
+.title1 {
+    margin-bottom: 20px;
+}
+
+.title2 {
+    margin-bottom: 20px;
 }

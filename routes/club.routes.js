@@ -81,18 +81,11 @@ router.get('/:clubId', (req, res, next) => {
 
     Promise
         .all(promises)
-        .then(([clubInfo, matchInfo, followers]) => {
+        .then(([clubInfo, matchInfo, favClubs]) => {
 
-            let isFollowing = false
+            let isFollowing = favClubs.some(({ _id }) => _id == req.session.currentUser._id)
 
-            followers.forEach(eachFollower => {
-                eachFollower.favouriteClubs.forEach(eachClub => {
-                    if (eachClub._id == clubId) {
-                        isFollowing = true
-                    }
-                })
-            })
-            res.render('clubs/club-details', { clubInfo, matchInfo, followers, isAdmin, isFollowing })
+            res.render('clubs/club-details', { clubInfo, matchInfo, followers: favClubs, isAdmin, isFollowing })
         })
         .catch(err => console.log(err))
 })
@@ -160,7 +153,6 @@ router.post('/:id/favourite', (req, res, next) => {
 
 
 // Eliminate from favourite
-
 router.post('/:id/eliminate-favourite', (req, res, next) => {
 
     const { id } = req.params
