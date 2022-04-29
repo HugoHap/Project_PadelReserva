@@ -6,75 +6,89 @@
     <p hidden id="latitudeMatch">{{detMatch.club.location.coordinates.[0]}}</p>
     <p hidden id="longitudeMatch">{{detMatch.club.location.coordinates.[1]}}</p>
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-4">
+            <a href="/clubs/{{detMatch.club.id}}">
+                <img alt="club pic" src="{{detMatch.club.image}}" class="figure-img img-fluid rounded">
+            </a>
+            <h4>{{detMatch.club.name}}</h4>
+        </div>
+
+        <div class="col-md-2">
             <div>
                 <h5>Hora:</h5>{{date}}
             </div>
+        </div>
+        <div class="col-md-2">
             <div>
                 <h5>Dia:</h5>{{day}}
             </div>
-
-            <h5>Club:</h5>{{detMatch.club.name}}
-            <img class="clubmatch" src="{{detMatch.club.image}}" alt="club pic">
         </div>
     </div>
-    <div class="container">
-        <h4>Jugadores</h4>
-        <div class="row">
-            {{#each detMatch.players}}
-            <div class="col-md-1">
-                <img class="matchplayers" src="{{avatar}}">
+</div>
+
+<div class="container">
+    <h4>Jugadores</h4>
+    <div class="row">
+        {{#each detMatch.players}}
+        <div class="col-md-1">
+            <img class="matchplayers" src="{{avatar}}">
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            {{#if isPlayer}}
+            <form action="/partidos/{{detMatch.id}}/desunirse" method="POST">
+                <button class="btn btn-outline-info" type="submit">Abandonar partido</button>
+            </form>
+            {{else}}
+            <form action="/partidos/{{detMatch.id}}/unirse" method="POST">
+                <button class="btn btn-outline-info" type="submit">Unirse al partido</button>
+            </form>
+            {{/if}}
+
+            {{#if result.set1.team1}}
+            <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                    Resultado del partido
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{result.set1.team1}} - {{result.set1.team2}}</li>
+                    <li class="list-group-item">{{result.set2.team1}} - {{result.set2.team2}}</li>
+                    <li class="list-group-item">{{result.set3.team1}} - {{result.set3.team2}}</li>
+                </ul>
             </div>
-            {{/each}}
+            {{/if}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <a href="/partidos" class="btn btn-dark">Volver a la lista de partidos</a>
         </div>
 
-    </div>
-
-    {{#if isPlayer}}
-    <form action="/partidos/{{detMatch.id}}/desunirse" method="POST">
-        <button class="btn btn-outline-info" type="submit">Desunirse</button>
-    </form>
-
-    {{else}}
-    <form action="/partidos/{{detMatch.id}}/unirse" method="POST">
-        <button class="btn btn-outline-info" type="submit">Unirse</button>
-    </form>
-    {{/if}}
-
-
-
-    {{#if result.set1.team1}}
-    <div class="card" style="width: 18rem;">
-        <div class="card-header">
-            Resultado del partido
+        <div class="col-md-3">
+            {{#if isCreator}}
+            <a href="/partidos/{{detMatch.id}}/resultado" class="btn btn-secondary">Introducir resultado</a>
+            {{/if}}
         </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">{{result.set1.team1}} - {{result.set1.team2}}</li>
-            <li class="list-group-item">{{result.set2.team1}} - {{result.set2.team2}}</li>
-            <li class="list-group-item">{{result.set3.team1}} - {{result.set3.team2}}</li>
-        </ul>
-        {{/if}}
 
-        {{#if isCreator}}
-        <a href="/partidos/{{detMatch.id}}/resultado" class="btn btn-secondary">Introducir resultado</a>
-        {{/if}}
+        <div class="col-md-2">
+            {{#if isAdmin}}
+            <form action="/partidos/{{detMatch.id}}/delete" method="POST">
+                <button class="btn btn-sm btn-danger" type="submit">Eliminar</button>
+            </form>
+            {{/if}}
+        </div>
+
+        <div class="col-md-2">
+            {{#if isCreator}}
+            <a href="/partidos/{{detMatch.id}}/edit" class="btn btn-warning">Editar partido</a>
+            {{/if}}
+        </div>
     </div>
-
-
-    <hr>
-
-    {{#if isAdmin}}
-    <form action="/partidos/{{detMatch.id}}/delete" method="POST">
-        <button class="btn btn-sm btn-danger" type="submit">Eliminar</button>
-    </form>
-    {{/if}}
-
-    {{#if isCreator}}
-    <a href="/partidos/{{detMatch.id}}/edit" class="btn btn-warning">Editar partido</a>
-    {{/if}}
-
-    <a href="/partidos" class="btn btn-dark">Volver a la lista de partidos</a>
-
 </div>
 
 <div class="container">
@@ -103,12 +117,13 @@
     </div>
 </div>
 
-<div class="container">
-    <h5>Comentarios</h5>
+<div class="container comments-container">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
+            <h5>Comentarios</h5>
             {{#each comments}}
             <div class="card comments" style="width: 33rem;">
+
                 <div class="card-body">
                     <h5 class="card-title">{{user.name}}</h5>
                     <p class="card-text">{{content}}</p>
@@ -118,9 +133,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/js/details-maps.js"></script>
