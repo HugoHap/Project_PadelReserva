@@ -17,13 +17,7 @@ router.get('/', isLoggedIn, (req, res) => {
         .populate("club players")
         .then(matches => {
 
-            matches.forEach(match => {
-                date = formatDate(match.date)
-                day = formatDay(match.date)
-                numPlay = match.players.length
-            });
-
-            res.render('matches/match-list', { matches, date, day, numPlay })
+            res.render('matches/match-list', { matches })
         })
         .catch(err => console.log(err))
 })
@@ -95,10 +89,22 @@ router.post('/:id/unirse', (req, res) => {
     const { id } = req.params
     const { _id } = req.session.currentUser
 
+
     Match
-        .findByIdAndUpdate(id, { $addToSet: { players: _id } })
-        .then(() => res.redirect('/partidos'))
-        .catch(err => console.log(err))
+        .findById(id)
+        .then(matches => {
+
+            if (matches.players.length < 4) {
+
+                Match
+                    .findByIdAndUpdate(id, { $addToSet: { players: _id } })
+                    .then(() => res.redirect('/partidos'))
+                    .catch(err => console.log(err))
+            } else {
+                res.redirect('/partidos')
+            }
+        })
+
 })
 
 router.post('/:id/desunirse', (req, res) => {

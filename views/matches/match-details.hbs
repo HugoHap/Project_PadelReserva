@@ -106,14 +106,16 @@
 <div class="container">
     <h5>Comentarios</h5>
     <div class="row">
-        {{#each comments}}
-        <div class="card comments" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">{{user.name}}</h5>
-                <p class="card-text">{{content}}</p>
+        <div class="col-md-6">
+            {{#each comments}}
+            <div class="card comments" style="width: 33rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{user.name}}</h5>
+                    <p class="card-text">{{content}}</p>
+                </div>
             </div>
+            {{/each}}
         </div>
-        {{/each}}
     </div>
 </div>
 
