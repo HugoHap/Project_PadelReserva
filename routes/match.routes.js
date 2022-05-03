@@ -121,37 +121,37 @@ router.post('/:id/desunirse', (req, res) => {
 
 // Delete match 
 
-router.post('/:id/delete', (req, res) => {
+// router.post('/:id/delete', (req, res) => {
 
-    const { id } = req.params
-    const isAdmin = req.session.currentUser.role === 'ADMIN'
+//     const { id } = req.params
+//     const isAdmin = req.session.currentUser.role === 'ADMIN'
 
-    Match
-        .findByIdAndDelete(id)
-        .then(() => {
-            res.redirect('/partidos', isAdmin)
-        })
-        .catch(err => console.log(err))
-})
+//     Match
+//         .findByIdAndDelete(id)
+//         .then(() => {
+//             res.redirect('/partidos', isAdmin)
+//         })
+//         .catch(err => console.log(err))
+// })
 
-router.get('/:id/edit', (req, res) => {
+// router.get('/:id/edit', (req, res) => {
 
-    const { id } = req.params
+//     const { id } = req.params
 
 
-    const promisesEdit = [
-        Match.findById(id).populate("players").populate("club"),
-        Club.find(),
-    ]
+//     const promisesEdit = [
+//         Match.findById(id).populate("players").populate("club"),
+//         Club.find(),
+//     ]
 
-    Promise
-        .all(promisesEdit)
-        .then(([editMatch, clubs]) => {
-            res.render('matches/match-edit', { editMatch, clubs })
-        })
-        .catch(err => console.log(err))
+//     Promise
+//         .all(promisesEdit)
+//         .then(([editMatch, clubs]) => {
+//             res.render('matches/match-edit', { editMatch, clubs })
+//         })
+//         .catch(err => console.log(err))
 
-})
+// })
 
 
 // Edit match 

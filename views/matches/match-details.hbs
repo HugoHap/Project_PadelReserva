@@ -73,15 +73,6 @@
             <a href="/partidos/{{detMatch.id}}/resultado" class="btn btn-secondary">Introducir resultado</a>
             {{/if}}
         </div>
-
-        <div class="col-md-2">
-            {{#if isAdmin}}
-            <form action="/partidos/{{detMatch.id}}/delete" method="POST">
-                <button class="btn btn-sm btn-danger" type="submit">Eliminar</button>
-            </form>
-            {{/if}}
-        </div>
-
         <div class="col-md-2">
             {{#if isCreator}}
             <a href="/partidos/{{detMatch.id}}/edit" class="btn btn-warning">Editar partido</a>
